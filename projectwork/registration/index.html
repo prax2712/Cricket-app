@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Register</title>
+ <link rel="stylesheet" type="text/css" href="regiscss.css">
+</head>
+<body>
+ <div class="container">
+ <h2>Register</h2>
+ <form action="/submit_registration" method="post">
+ <label for="name">Name:</label><br>
+ <input type="text" id="name" name="name" required><br>
+ <label for="username">Username:</label><br>
+ <input type="text" id="username" name="username" required><br>
+ <label for="password">Password:</label><br>
+ <input type="password" id="password" name="password" required><br>
+ <label for="confirm_password">Confirm Password:</label><br>
+ <input type="password" id="confirm_password" name="confirm_password" required><br>
+ <label for="dob">Date of Birth:</label><br>
+ <input type="date" id="dob" name="dob" required><br>
+ <label for="batting_style">Batting Style:</label><br>
+ <select id="batting_style" name="batting_style" required>
+<option value=""></option>
+ <option value="right_hand_batsman">Right-hand bat</option>
+ <option value="left_hand_batsman">Left-hand bat</option>
+ </select><br>
+ <label for="bowling_style">Bowling Style:</label><br>
+ <select id="bowling_style" name="bowling_style" required>
+    <option value=""></option>
+ <option value="fast">Fast</option>
+ <option value="medium_fast">Medium-fast</option>
+ <option value="medium">Medium</option>
+ <option value="medium_slow">Medium-slow</option>
+ <option value="slow">Slow</option>
+ <option value="spin">Spin</option>
+ </select><br>
+ <label for="wicketkeeper">Wicketkeeper
+ <input type="checkbox" id="wicketkeeper" name="wicketkeeper"></label>
+ <input type="submit" value="Register">
+ </form>
+ <p id="password_error" style="color:red;"></p>
+ </div>
+ <script src="userregister.js"></script>
+</body>
+</html>
