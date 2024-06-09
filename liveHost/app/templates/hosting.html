@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'hosting.css' %}" />
+</head>
+<body>
+    <div id="outermost">
+    <div id="outer-container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="inner" id="team1Name-outer">
+                <label for="team1Name">Team 1 Name</label>
+                <input type="text" class="input" id="team1Name" name="team1name" required>
+            </div>
+            <div class="inner"  id="team2Name-outer">
+                <label for="team2Name">Team 2 Name</label>
+                <input type="text" class="input" id="team2Name" name="team2name" required>
+            </div>
+            <div class="inner" id="date-outer">
+                <label for="date">Date</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="inner" id="time-outer">
+                <label for="time">Time</label>
+                <input type="Time" id="time" name="time" required>
+            </div>
+            <div class="inner" id="NoOvers-outer">
+                <label for="NoOvers">Number Of Overs</label>
+                <input type="text" class="input" id="NoOvers" name="noovers" required>
+            </div>
+            <div class="inner" id="venue-outer">
+                <label for="venue">Venue</label>
+                <input type="text" id="venue" class="input" name="venue" required>
+            </div>
+            <div class="inner" id="Start">
+                <button type="submit" id="Start1" class="buttons">Save</button>
+            </div>
+            <p id="message"></p>
+        </form>
+    </div>
+    </div>
+    <script src="{% static 'hosting.js' %}"></script>
+</body>
+</html>

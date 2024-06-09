@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #0b0b0b;
+    border-radius: 5px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+  }
+  h5{
+    color:red;
+  }
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+  }
+  
+  input[type="submit"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    height: 40px;
+    background-color: #2fac33;
+    color: white;
+    border: none;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #849b85;
+  }
+  
+  #password_error {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  
+  /* Media queries for mobile screens */
+  
+  /* For screens with a maximum width of 480px ( typical mobile screen size) */
+  @media only screen and (max-width: 480px) {
+   .container {
+      width: 90%; /* adjust the width to fit the mobile screen */
+      padding: 10px; /* reduce padding to fit the mobile screen */
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="password"] {
+      padding: 3px; /* reduce padding to fit the mobile screen */
+    }
+    select {
+      padding: 3px; /* reduce padding to fit the mobile screen */
+    }
+    input[type="submit"] {
+      height: 30px; /* reduce height to fit the mobile screen */
+    }
+    #password_error {
+      font-size: 10px; /* reduce font size to fit the mobile screen */
+    }
+  }
+  
+  /* For screens with a maximum width of 320px ( smaller mobile screen size) */
+  @media only screen and (max-width: 320px) {
+   .container {
+      width: 95%; /* adjust the width to fit the smaller mobile screen */
+      padding: 5px; /* reduce padding to fit the smaller mobile screen */
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="password"] {
+      padding: 2px; /* reduce padding to fit the smaller mobile screen */
+    }
+    select {
+      padding: 2px; /* reduce padding to fit the smaller mobile screen */
+    }
+    input[type="submit"] {
+      height: 25px; /* reduce height to fit the smaller mobile screen */
+    }
+    #password_error {
+      font-size: 9px; /* reduce font size to fit the smaller mobile screen */
+    }
+  }

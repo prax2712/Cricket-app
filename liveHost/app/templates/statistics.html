@@ -1,0 +1,77 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'statistics.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Player Statistics</title>
+</head>
+<body>
+  <div class="container">
+    <form method="get" action="{% url 'statistics' %}">
+    <input type="text" id="searchInput" name="search" placeholder="Search by username or name">
+    <div id="suggestions" class="suggestions-box"></div> 
+    <input type="submit" value="Search">
+    </form>
+    {% if player %} 
+      <h1>{{ player.first_name }} {{ player.last_name }}</h1>
+      <div class="player-stats">
+        <div class="player-info">
+          <p><strong>Matches Played:</strong> {{ player.matches_played }}</p>
+          </div>
+          <div class="batting-stats">
+          <h2>Batting Stats</h2>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Runs Scored</th>
+                <th>Average</th>
+                <th>Fours</th>
+                <th>Sixes</th>
+                <th>Highest Score</th>
+                <th>Strike Rate</th>
+                <th>50</th>
+                <th>100</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ player.runs_scored }}</td>
+                <td>{{ player.batting_average }}</td>
+                <td>{{ player.fours }}</td>
+                <td>{{ player.sixes }}</td>
+                <td>{{ player.highest_score }}</td>
+                <td>{{ player.strike_rate }}</td>
+                <td>{{ player.half_centuries }}</td>
+                <td>{{ player.centuries }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bowling-stats">
+          <h2>Bowling Stats</h2>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>No. of Wickets</th>
+                <th>Bowling Average</th>
+                <th>Economy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ player.wickets_taken }}</td>
+                <td>{{ player.bowling_average }}</td>
+                <td>{{ player.economy }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% else %}
+      <p>No player found.</p>
+    {% endif %}
+  </div>
+  <script src="{% static 'statistics.js' %}"></script>
+</body>
+</html>

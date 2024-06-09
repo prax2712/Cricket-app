@@ -1,0 +1,90 @@
+<!DOCTYPE html5>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}" />
+  </head>
+  <body>
+    
+    <div>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="{% static 'Logo.png' %}" alt="Logo" />
+        </div>
+        <ul class="nav-links">
+          <li><a href="">Home</a></li>
+          <li><a href="http://127.0.0.1:8000/statistics/">Players</a></li>
+          <li><a href={{direct}}>Host</a></li>
+        </ul>
+        <div class="nav-buttons">
+          <button id="login-button">Login</button>
+          <a class="profile-button">
+            <img src="{% static 'profile.png' %}" alt="profile" id="profile-img" />
+          </a>
+        </div>
+      </nav>
+    </div>
+    
+    </div>
+    <div id="content">
+      <div id="title">
+        <div class="title-content"  id="live"><a>Live Matches</a></div>
+        <div class="title-content" id="upcoming"><a>Upcoming Matches</a></div>
+        <div class="title-content" id="recent"><a>Recent Matches</a></div>
+      </div>
+    <div id="profile-info">
+      {% if player %}
+        <h2>{{ player.first_name }} {{ player.last_name }}</h2>
+        <h3>Upcoming Matches:</h3>
+        <ul>
+        {% for match in upcoming_matches_host %}
+        <li><a href="{% url 'toss' match.match_id %}">{{ match.team1 }} vs {{ match.team2 }} ({{ match.match_date }})</a></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+        <div class="tab-content" id="tab-content-live">
+          {% for match in live_matches %}
+            <a href="/liveView/{{ match.match_id }}" class="match_link">  
+              <div class="info">
+                <p class="details">{{match.team1}} vs {{match.team2}}</p>
+                <p class="details">{{match.match_date}} at {{match.match_time}}</p>
+                <p class="details">Venue: {{match.venue}}</p>
+              </div>
+            </a>
+          {% endfor %}
+    
+        </div>
+        <div class="tab-content" id="tab-content-upcoming">
+          {% for match in upcoming_matches %}
+            <a href="/liveView/{{ match.match_id }}" class="match_link">  
+              <div class="info">
+                <p class="details">{{match.team1}} vs {{match.team2}}</p>
+                <p class="details">{{match.match_date}} at {{match.match_time}}</p>
+                <p class="details">Venue: {{match.venue}}</p>
+              </div>
+            </a>
+          {% endfor %} 
+        </div>
+        <div class="tab-content" id="tab-content-recent">
+          {% for match in recent_matches %}
+            <a href="/liveView/{{ match.match_id }}" class="match_link">  
+              <div class="info">
+                <p class="details">{{match.team1}} vs {{match.team2}}</p>
+                <p class="details">{{match.match_date}} at {{match.match_time}}</p>
+                <p class="details">Venue: {{match.venue}}</p>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+    </div>
+    <div>
+      
+    </div>
+    
+    <script src="{% static 'home.js' %}" ></script>
+  </body>
+</html>

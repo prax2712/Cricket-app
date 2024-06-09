@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cricket Score</title>
+<link rel="stylesheet" href="{% static 'live_host_style.css' %}">
+</head>
+<body>
+  <div id="layer">hi</div>
+    <div id="matchend" ><button id="endmatch" value="endmatch"><a href="/">Endmatch</a></button></div>
+  <div class="container">
+  <h1>{{team1}} <span> VS </span>{{team2}}</h1>
+  <div class="scoreboard">
+    <div class="team-batting">
+      <h2 id="bating-team-name">{{bating_team}}</h2>
+      <div class="score">
+        <span id="total-score">0</span>
+        <span>/</span>
+        <span id="total-wickets">0</span>
+        <span id="overs-completed">Overs:0.0</span>
+      </div>
+      <div class="batsman-on-strike">
+        <div class="strike-radio-buttons">
+          <div>
+          
+            <div class ="batsman-current" style="display:flex;"><p id="batsman-1" data-value="h">Batsman 1</p> <p style="margin-left:20px;margin-right:20px">-</p><span class="batsman1-sc" id="batsman1-score" value="0">0</span><span class="batsman1-sc" id="batsman1-balls" style="margin-left:30px;" value="0">0</span></div>
+          </div>
+          <div>
+            
+            <div class ="batsman-current" style="display:flex;"><p  id="batsman-2" data-value="">Batsman 2</p> <p style="margin-left:20px;margin-right:20px">-</p><span class="batsman2-sc" id="batsman2-score" value="0">0</span><span class="batsman2-sc" id="batsman2-balls" style="margin-left:30px;" value="0">0</span></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="team-bowling">
+      <h2 id="bowling-team-name">{{bowling_team}}</h2>
+      <div class="bowler-container">
+        <span class="bowler-name" id="bowler-name" value="">Bowler-Name:</span><br>
+        <span class="bowler-score" id="bowler-score" style="display:inline;">0</span><span class="bowler-score" style="margin-left:5px;margin-right:5px;display:inline;">/</span><span style="display:inline;"class="bowler-score" id="bowler-wickets">0</span>
+        <span class="bowler-overs" id="bowler-overs">Overs:0.0</span>
+      </div>
+    </div>
+</div>
+</div>
+<div class="selecting-players">
+ 
+  <div class="selecting-player selecting-batsman">
+
+    </select>
+    <select id="selecting-batsman-1" value="hello">
+      
+    {% for i,j in batsmans1 %}
+    
+        <option class="baters-1" value ={{j}}>{{i}}</option>
+    {% endfor %}
+  </select>
+</select>
+<select id="selecting-batsman-2" value="hello">
+  
+{% for i,j in batsmans2 %}
+
+    <option class="baters-2" value ={{j}}>{{i}}</option>
+{% endfor %}
+</select>
+  </div>
+
+  <div class="selecting-player selecting-bowler">
+    <select id="selecting-bowler">
+     {% for i,j in bowlers %}
+        <option value={{j}}>{{i}}</option>
+    {% endfor %}
+      <!-- Add more options as needed -->
+    </select>
+  </div>
+  <div class="actions">
+    <div class="runs">
+      <button id="sixer" class="add-runs" value="6">6</button>
+      <button class="add-runs" value="5">5</button>
+      <button class="add-runs" value="4">4</button>
+      <button class="add-runs" value="3">3</button>
+      <button class="add-runs" value="2">2</button>
+      <button class="add-runs" value="1">1</button>
+      <button class="add-runs" value="0">0</button>
+    </div>
+    <div class="events">
+      <button class="add-event zero-float" value="Run-Out batsmen1" id="run-out-b1">Run-Out Batsmen1</button>
+        <button class="add-event" value="Wicket"id="wicket-out">Wicket</button>
+        <button class="add-event zero-float" value="Run-Out batsmen2" id="run-out-b2">Run-Out Batsmen2</button>
+      </div>
+      <div class="events1">
+      <button class="add-event one-float" value="Wide" id="wide">Wide</button>
+        <button class="add-event zero-float" value="Byes" id="byes">Byes</button>
+      <button class="add-event one-float" value="Noball" id="noball">Noball</button>
+      <button class="add-event zero-float" value="Over throw" id="overthrow">Over throw</button>
+    </div>
+    <div class="strike">
+        <button class="add-event" id="change-strike"value="change-strike">Change Strike</button>
+        <div><button class="add-event" id="dec_run_1">Decrease runs by 1</button></div>
+      </div>
+      <div class="strike">
+        <div><button class="add-event" id="dec_ball_1" value="undo">Decrease balls by 1</button></div>
+        <div><button class="add-event" id="dec_wicket_1" value="undo">Decrease wickets by 1</button></div>
+      </div>
+      </div>
+    </div>
+    <div id="one-float">
+        <div class="te"><h3>1+</h3></div>
+        <div class="te">
+            <div class="flat-adder" value="1">1</div>
+            <div class="flat-adder" value="2">2</div>
+            <div class="flat-adder" value="3">3</div>
+        </div>
+        <div class="te">
+            <div class="flat-adder" value="4">4</div>
+            <div class="flat-adder" vlaue="5">5</div>
+            <div class="flat-adder" value="6">6</div>
+        </div >
+        <div class="te">
+            <div class="flat-adder" value="0">0</div>
+        </div>
+
+    </div>
+    <div id="zero-float">
+      <div class="te"><h3>0+</h3></div>
+      <div class="te">
+          <div class="flat-adder" value="1">1</div>
+          <div class="flat-adder" value="2">2</div>
+          <div class="flat-adder" value="3">3</div>
+      </div>
+      <div class="te">
+          <div class="flat-adder" value="4">4</div>
+          <div class="flat-adder"value="5">5</div>
+          <div class="flat-adder" value="6">6</div>
+      </div >
+      <div class="te">
+          <div class="flat-adder" value="0">0</div>
+      </div>
+
+
+</div>
+{{MatchId|json_script:"match-id"}}
+
+    <script src="{% static 'live_host_scri.js' %}"></script>
+    </body>
+    </html>
