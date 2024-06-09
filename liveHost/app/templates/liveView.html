@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Scorecard</title>
+    <link rel="stylesheet" href="{% static 'liveView.css' %}" />
+  </head>
+  <body>
+    <div class="scorecard">
+      <div class="teams">
+        <div class="team team-1"><span id="team1"></span></div>
+        <div class="vs">VS</div>
+        <div class="team team-2"><span id="team2"></span></div>
+      </div>
+
+      <div class="innings">Innings <span id="innings_no"></span></div>
+      <div id="toss" style="margin-bottom:10px;"></div>
+      <div class="score">
+        <span id="score-value"></span> /
+        <span id="wickets-value"></span>
+        <span id="overs-value"></span>
+      </div>
+      <div class="scoreboard">
+        <div class="team-batting">
+          <div class="batsman-on-strike" style="display: inline">
+            <span id="batter1" style="font-weight: bold">Batter 1 :</span>
+            <span id="batter-1-score">0</span>(<span id="batter-1-balls">0</span
+            >)
+            <br />
+            <br />
+            <br />
+            <span id="batter2" style="font-weight: bold">Batter 2 :</span>
+            <span id="batter-2-score">0</span>(<span id="batter-2-balls">0</span
+            >)
+          </div>
+        </div>
+        <div class="team-bowling">
+          <span id="bowler-name">Bowler-Name :</span>
+          <span class="bowler-score" id="bowler-score">0 - 0</span>
+          <span class="bowler-overs" id="bowler-overs">Overs:0.0</span>
+        </div>
+      </div>
+      <div id="target">Target : </div>
+      <div class="previous-balls">
+        <div id="ball1" class="ball"></div>
+        <div id="ball2" class="ball"></div>
+        <div id="ball3" class="ball"></div>
+        <div id="ball4" class="ball"></div>
+        <div id="ball5" class="ball"></div>
+        <div id="ball6" class="ball"></div>
+      </div>
+      <div class="innings1-2">
+        <div class="inn1">INNINGS 1</div>
+        <div class="inn2">INNINGS 2</div>
+      </div>
+    </div>
+
+    <div class="inn1-content" style="display: none">
+      <div class="inn1-batting-container"></div>
+      <div class="inn1-bowling-container"></div>
+    </div>
+
+    <div class="inn2-content" style="display: none">
+      <div class="inn2-batting-container"></div>
+      <div class="inn2-bowling-container"></div>
+    </div>
+    {{ match_id|json_script:"match-id" }}
+    <script src="{% static 'liveView.js' %}"></script>
+  </body>
+</html>

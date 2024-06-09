@@ -1,0 +1,355 @@
+{% load static%}
+<link rel="stylesheet" href="{% static 'player_selection.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team-Selection</title>
+</head>
+<body>
+   <div class="container">
+       <form method="post">
+        {%csrf_token%}
+        {%if duplicates%}
+        <h2>Duplicate player names entered please check.</h2>
+        {%endif%}
+        <h2>{{match.team1}}</h2>
+        
+<div class="player">
+    <label>Player 1:
+    <input type="text" name="t1player1" >
+    {%if errors1.0%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 2:
+    <input type="text" name="t1player2" >
+    {%if errors1.1%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 3:
+    <input type="text" name="t1player3" >
+    {%if errors1.2%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 4:
+    <input type="text" name="t1player4" >
+    {%if errors1.3%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 5:
+    <input type="text" name="t1player5" >
+    {%if errors1.4%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 6:
+    <input type="text" name="t1player6" >
+    {%if errors1.5%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 7:
+    <input type="text" name="t1player7" >
+    {%if errors1.6%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 8:
+    <input type="text" name="t1player8" >
+    {%if errors1.7%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 9:
+    <input type="text" name="t1player9" >
+    {%if errors1.8%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 10:
+    <input type="text" name="t1player10" >
+    {%if errors1.9%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 11:
+    <input type="text" name="t1player11" >
+    {%if errors1.10%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 12:
+    <input type="text" name="t1player12" >
+    {%if errors1.11%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 13:
+    <input type="text" name="t1player13" >
+    {%if errors1.12%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 14:
+    <input type="text" name="t1player14" >
+    {%if errors1.13%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+
+
+<div class="player">
+    <label>Player 15:
+    <input type="text" name="t1player15" >
+    {%if errors1.14%}
+    <br>
+       <span class="error">Enter correct username</span>
+        {%endif%}
+    </label><br>
+</div>
+<br>
+        <h2>{{match.team2}}</h2>
+        
+
+        <div class="player">
+            <label>Player 1:
+            <input type="text" name="t2player1" >
+            {%if errors2.0%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 2:
+            <input type="text" name="t2player2" >
+            {%if errors2.1%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 3:
+            <input type="text" name="t2player3" >
+            {%if errors2.2%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 4:
+            <input type="text" name="t2player4" >
+            {%if errors2.3%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 5:
+            <input type="text" name="t2player5" >
+            {%if errors2.4%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 6:
+            <input type="text" name="t2player6" >
+            {%if errors2.5%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 7:
+            <input type="text" name="t2player7" >
+            {%if errors2.6%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 8:
+            <input type="text" name="t2player8" >
+            {%if errors2.7%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 9:
+            <input type="text" name="t2player9" >
+            {%if errors2.8%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 10:
+            <input type="text" name="t2player10" >
+            {%if errors2.9%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 11:
+            <input type="text" name="t2player11" >
+            {%if errors2.10%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 12:
+            <input type="text" name="t2player12" >
+            {%if errors2.11%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 13:
+            <input type="text" name="t2player13" >
+            {%if errors2.12%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 14:
+            <input type="text" name="t2player14" >
+            {%if errors2.13%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        
+        <div class="player">
+            <label>Player 15:
+            <input type="text" name="t2player15" >
+            {%if errors2.14%}
+            <br>
+               <span class="error">Enter correct username</span>
+                {%endif%}
+            </label><br>
+        </div>
+        
+        <br>
+        <input type="submit" value="Save">
+      </form>
+   </div> 
+</body>
+</html>

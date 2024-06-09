@@ -1,0 +1,19 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'toss.css' %}">
+<h2>Toss</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="toss_winner">Toss Winner:</label>
+    <select name="toss_winner" id="toss_winner">
+        <option value="{{ match.team1 }}">{{ match.team1 }}</option>
+        <option value="{{ match.team2 }}">{{ match.team2 }}</option>
+    </select>
+
+    <label for="decision">Decision:</label>
+    <select name="decision" id="decision">
+        <option value="bat">Bat</option>
+        <option value="bowl">Bowl</option>
+    </select>
+
+    <button type="submit">Strat</button>
+</form>

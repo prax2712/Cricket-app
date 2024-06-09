@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Register</title>
+ <link rel="stylesheet" type="text/css" href="{% static 'registration.css' %}">
+</head>
+<body>
+ <div class="container">
+   {%for message in messages %}
+   <h5>{{message}}</h5>
+   {%endfor%}
+ <h2>Register</h2>
+ <form method="POST" action="{% url 'signup' %}">
+   {% csrf_token %}
+ <label for="first_name">First Name:</label><br>
+ <input type="text" id="first_name" name="first_name" required><br>
+ <label for="last_name">Last Name:</label><br>
+ <input type="text" id="last_name" name="last_name" required><br>
+ <label for="username">Username:</label><br>
+ <input type="text" id="username" name="username" required><br>
+ <label for="password">Password:</label><br>
+ <input type="password" id="password" name="password" required><br>
+ <label for="confirm_password">Confirm Password:</label><br>
+ <input type="password" id="confirm_password" name="confirm_password" required><br>
+ <label for="batting_style">Batting Style:</label><br>
+ <select id="batting_style" name="batting_style" required>
+<option value=""></option>
+ <option value="right_hand_batsman">Right-hand bat</option>
+ <option value="left_hand_batsman">Left-hand bat</option>
+ </select><br>
+ <label for="bowling_style">Bowling Style:</label><br>
+ <select id="bowling_style" name="bowling_style" required>
+    <option value=""></option>
+ <option value="fast">Fast</option>
+ <option value="medium_fast">Medium-fast</option>
+ <option value="medium">Medium</option>
+ <option value="medium_slow">Medium-slow</option>
+ <option value="slow">Slow</option>
+ <option value="spin">Spin</option>
+ </select><br>
+ <input type="submit" value="Register">
+ </form>
+ <p id="password_error" style="color:red;"></p>
+ </div>
+ <script src="{% static 'registration.js' %}"></script>
+</body>
+</html>

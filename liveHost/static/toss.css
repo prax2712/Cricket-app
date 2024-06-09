@@ -1,0 +1,55 @@
+/* General Page Styling */
+body {
+    font-family: sans-serif; /* Choose a modern font */
+    display: flex; /* Center content using Flexbox */
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Light background for better contrast */
+    margin: 0; /* Remove default body margin */
+}
+
+h2 {
+    color: #333; /* Darker text for headings */
+    text-align: center;
+}
+
+/* Form Container Styling */
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    text-align: center; /* Align labels and inputs to the center */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select { /* Removed styling from button */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* Button Styling (Now separate) */
+button {
+    display: block;  /* Make button take full width */
+    width: 100%;     /* Occupy full container width */
+    padding: 30px;
+    border: none;   /* Remove default button border */
+    border-radius: 4px;
+    background-color: #4CAF50; 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
+
+button:hover {
+    background-color: #45a049; 
+}
