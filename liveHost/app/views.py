@@ -26,62 +26,78 @@ def player_selection(request, match_id):
     errors2=[]
     flag=0
     if request.method == 'POST':
+        no_players=int(request.POST.get('no_players'))
         team1_players = [request.POST.get(f't1player{i}', '') for i in range(1, 16)]
         team2_players = [request.POST.get(f't2player{i}', '') for i in range(1, 16)]
+        team1_players_entered=15-sum(1 for i in team1_players if i=='')
+        team2_players_entered=15-sum(1 for i in team2_players if i=='')
         print(team1_players)
+        print(team1_players_entered)
         print(team2_players)
-        
-        no_duplicates_list1 = len(team1_players) == len(set(team1_players))
-        no_duplicates_list2 = len(team2_players) == len(set(team2_players))
-        all_different = all(item1 != item2 for item1 in team1_players for item2 in team2_players)
-        print(no_duplicates_list1)
-        print(no_duplicates_list2)
-        print(all_different)
-        if not (no_duplicates_list1 and no_duplicates_list2 and all_different):
+        print(team2_players_entered)
+        if(team2_players_entered!=no_players or team1_players_entered!=no_players):
+             print('numner player error')
+             return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':0,'no_players':1})
+        print(len(set(team1_players)))
+        print(len(set(team2_players)))
+
+        no_duplicates_list1 = team1_players_entered+1 == len(set(team1_players))
+        no_duplicates_list2 = team2_players_entered+1 == len(set(team2_players))
+        all_players=len(set(team1_players+team2_players))
+
+        if not (no_duplicates_list1 and no_duplicates_list2 and 2*no_players+1 == all_players):
              print("dup")
-             return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':1})
+             return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':1,'no_players':0})
+        
+
 
         for players in team1_players:
-            try:
-                player_stats.objects.get(username=players)
-                errors1.append(0)
-            except player_stats.DoesNotExist:
-                        errors1.append(1)
+            if(players!=''):
+                try:
+                    player_stats.objects.get(username=players)
+                    errors1.append(0)
+                except player_stats.DoesNotExist:
+                            errors1.append(1)
+            else:
+                 errors1.append(0)
         for players in team2_players:
-            try:
-                player_stats.objects.get(username=players)
-                errors2.append(0)
-            except player_stats.DoesNotExist:
-                        errors2.append(1)
+            if(players!=''):
+                try:
+                    player_stats.objects.get(username=players)
+                    errors2.append(0)
+                except player_stats.DoesNotExist:
+                            errors2.append(1)
+            else:
+                 errors2.append(0)
 
         if 1 not in errors1 and 1 not in errors2:
             for player_username in team1_players:
-                player=player_stats.objects.get(username=player_username)
-                player1=player_match_stats.objects.create(
-                        match_id=match_id,
-                        username=player_username,
-                        player_name=f"{player.first_name} {player.last_name}",
-                        team_name=match.team1,  
-                    )
-                player1.save()
-            for player_username in team2_players:
-                  player=player_stats.objects.get(username=player_username)
-                  player1=player_match_stats.objects.create(
+                if(player_username!=''):
+                    player=player_stats.objects.get(username=player_username)
+                    player1=player_match_stats.objects.create(
                             match_id=match_id,
                             username=player_username,
                             player_name=f"{player.first_name} {player.last_name}",
-                            team_name=match.team2,  
+                            team_name=match.team1,  
                         )
-                  player1.save()
+                    player1.save()
+            for player_username in team2_players:
+                  if(player_username!=''):
+                    player=player_stats.objects.get(username=player_username)
+                    player1=player_match_stats.objects.create(
+                                match_id=match_id,
+                                username=player_username,
+                                player_name=f"{player.first_name} {player.last_name}",
+                                team_name=match.team2,  
+                            )
+                    player1.save()
             flag=1
         if(flag==1):
+             match.no_players=no_players
              match.status=1
              match.save()
              username = match.host
-             return redirect('homepage', username=username)  
-    print(errors1)
-    print(errors2)
-    return render(request, 'player_selection.html', {'match': match, 'errors1': errors1,'errors2':errors2,'duplicates':0})
+             return redirect('home', username=username) 
 
 from django.http import JsonResponse
 
