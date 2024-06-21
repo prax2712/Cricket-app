@@ -4,6 +4,7 @@ from datetime import time
 
 class match_info(models.Model):
     match_id = models.AutoField(primary_key = True)
+    no_players=models.IntegerField(db_default=5)
     host = models.CharField(max_length=255,db_default="admin")
     venue = models.CharField(max_length=255)
     match_date = models.DateField(null=False)
