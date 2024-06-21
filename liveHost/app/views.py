@@ -269,7 +269,7 @@ def homepage(request, username):
     player = get_object_or_404(player_stats, username=username)
     upcoming_matches_host = match_info.objects.filter(
         host=username, 
-        status=0
+        status=1
     )
     upcoming_matches = match_info.objects.filter(status=1)
     live_matches = match_info.objects.filter(status=2)
