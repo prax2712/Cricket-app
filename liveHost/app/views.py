@@ -301,3 +301,41 @@ def homepageNonUser(request):
         'direct':"/"
     }
     return render(request, 'home.html', context)
+def match_summary(request, match_id):
+    match = get_object_or_404(match_info, match_id=match_id)
+    players_team1=player_match_stats.objects.all().filter(match_id = match_id,team_name = match.first_batting)
+    players_team2=player_match_stats.objects.all().filter(match_id = match_id,team_name = match.first_bowling)
+    innings1_batting=[]
+    innings1_bowling=[]
+    innings2_batting=[]
+    innings2_bowling=[]
+    for i in players_team1:
+        if(i.bowls_faced!=0):
+            innings1_batting.append([i.player_name,i.runs_scored,i.bowls_faced,i.fours,i.sixes,i.strike_rate])
+        if(i.bowls_bowled!=0) :
+            innings2_bowling.append([i.player_name,f'{i.bowls_bowled//6}.{i.bowls_bowled%6}',i.runs_conceded,i.wickets,i.economy])
+    for i in players_team2:
+        if(i.bowls_faced!=0):
+            innings2_batting.append([i.player_name,i.runs_scored,i.bowls_faced,i.fours,i.sixes,i.strike_rate])
+        if(i.bowls_bowled!=0) :
+            innings1_bowling.append([i.player_name,f'{i.bowls_bowled//6}.{i.bowls_bowled%6}',i.runs_conceded,i.wickets,i.economy])
+    if(match.match_winner==match.first_batting and match.status == 3):
+        result=f"{match.match_winner} won by {abs(match.innings1_score - match.innings2_score)} runs"
+    elif(match.match_winner==match.first_bowling and match.status==3):
+        result=f"{match.match_winner} won by {abs(match.no_players-match.innings2_wickets)} wickets"
+    else:
+        result='Match still in progress'
+    context = {
+        'match': match,
+        'team1_score': f"{match.innings1_score}/{match.innings1_wickets}",
+        'team2_score': f"{match.innings2_score}/{match.innings2_wickets}",
+        'innings1_overs':match.innings1_overs,
+        'innings2_overs':match.innings2_overs,
+        'result': result,
+        'innings1_batting':innings1_batting,
+        'innings1_bowling':innings1_bowling,
+        'innings2_batting':innings2_batting,
+        'innings2_bowling':innings2_bowling,
+    }
+    return render(request, 'match_summary.html', context)
+
