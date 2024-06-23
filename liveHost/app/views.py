@@ -322,7 +322,7 @@ def match_summary(request, match_id):
     if(match.match_winner==match.first_batting and match.status == 3):
         result=f"{match.match_winner} won by {abs(match.innings1_score - match.innings2_score)} runs"
     elif(match.match_winner==match.first_bowling and match.status==3):
-        result=f"{match.match_winner} won by {abs(match.no_players-match.innings2_wickets)} wickets"
+        result=f"{match.match_winner} won by {abs(min(match.no_players,11)-match.innings2_wickets)-1} wickets"
     else:
         result='Match still in progress'
     context = {
