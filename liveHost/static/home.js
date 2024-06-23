@@ -32,6 +32,19 @@ document.getElementById('profile-img').addEventListener('click', function() {
   const profileInfo = document.getElementById('profile-info');
   profileInfo.style.display = profileInfo.style.display === 'none' ? 'block':'none';
 });
-document.getElementById("login-button").onclick=function(){
-  window.location.href="http://127.0.0.1:8000/login/"
-}
+document.addEventListener("DOMContentLoaded", function() {
+  var loginButton = document.getElementById("login-button");
+  var logoutButton = document.getElementById("logout-button");
+
+  if (loginButton) {
+    loginButton.onclick = function() {
+      window.location.href = "http://127.0.0.1:8000/login";
+    }
+  }
+
+  if (logoutButton) {
+    logoutButton.onclick = function() {
+      window.location.href = "http://127.0.0.1:8000/logout";
+    }
+  }
+});

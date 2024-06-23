@@ -1,8 +1,32 @@
 {% load static %}
+<body>
 <link rel="stylesheet" href="{% static 'toss.css' %}">
+<div id="outer-container">
+<div class="container">
+    <div class="coin" id="coin">
+        <div class="heads">
+            <img src="{%static 'heads.png'%}">
+        </div>
+        <div class="tails">
+            <img src="{%static 'tails.png'%}">
+        </div>
+    </div>
+    <div class="buttons">
+        <button id="flip-button">
+            Flip Coin
+        </button>
+        <button id="reset-button">
+            Reset
+        </button>
+    </div>
+</div>
+<div>
 <h2>Toss</h2>
+
 <form method="POST">
     {% csrf_token %}
+    
+    <p>{{ match.team1 }}<span> vs </span>{{ match.team2 }}</p>
     <label for="toss_winner">Toss Winner:</label>
     <select name="toss_winner" id="toss_winner">
         <option value="{{ match.team1 }}">{{ match.team1 }}</option>
@@ -15,5 +39,10 @@
         <option value="bowl">Bowl</option>
     </select>
 
-    <button type="submit">Strat</button>
+    <button type="submit" id="butt">Start</button>
+
 </form>
+</div>
+</div>
+<script src="{% static 'toss.js' %}"></script>
+</body>

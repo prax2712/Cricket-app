@@ -9,6 +9,7 @@ from django.contrib.auth.models import auth,User
 from django.contrib import messages
 from .models import player_stats,match_info
 from django.urls import reverse
+from django.contrib.auth import logout
 
 def statistics(request):
     player=None
@@ -149,7 +150,7 @@ def login(request):
         print(f"Authenticated User: {user}")  
         if user is not None:
             auth.login(request,user)
-            return redirect('homepage', username=username)
+            return redirect('home', username=username)
         else:
             messages.info(request,'check your details correctly or register ')
             return redirect('login')
@@ -340,3 +341,6 @@ def match_summary(request, match_id):
     }
     return render(request, 'match_summary.html', context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('/')
