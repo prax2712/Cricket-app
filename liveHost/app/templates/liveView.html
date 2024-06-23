@@ -5,21 +5,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cricket Scorecard</title>
-    <link rel="stylesheet" href="{% static 'liveView.css' %}" />
+    <link rel="stylesheet" href="{% static 'liveV.css' %}" />
   </head>
   <body>
     <div class="scorecard1">
     <div class="scorecard">
       <div class="teams">
-        <div class="team team-1"><span id="team1"></span></div>
+        <div class="team team-1"><span id="team1" style="color:aquamarine;"></span></div>
         <div class="vs">VS</div>
-        <div class="team team-2"><span id="team2"></span></div>
+        <div class="team team-2"><span id="team2"style="color:aquamarine;"></span></div>
       </div>
 
       <div class="innings">Innings <span id="innings_no"></span></div>
       <div id="toss" style="margin-bottom:10px;"></div>
       <div class="score">
-        <span id="score-value"></span> /
+        <span id="score-value"></span> 
+        <span style="color:rgb(34, 204, 111);">/</span>
         <span id="wickets-value"></span>
         <span id="overs-value"></span>
       </div>
@@ -37,10 +38,10 @@
             >)
           </div>
         </div>
-        <div class="team-bowling">
+        <div class="team-bowling" >
           <span id="bowler-name">Bowler-Name :</span>
           <span class="bowler-score" id="bowler-score">0 - 0</span>
-          <span class="bowler-overs" id="bowler-overs">Overs:0.0</span>
+          <span class="bowler-overs" id="bowler-overs" style="">Overs:0.0</span>
         </div>
       </div>
       <div id="need"></div>
@@ -73,7 +74,7 @@
       <div class="inn2-batting-container"></div>
       <div class="inn2-bowling-container"></div>
     </div>
-    </div>
+  </div>
     {{ match_id|json_script:"match-id" }}
     <script src="{% static 'liveView.js' %}"></script>
   </body>
