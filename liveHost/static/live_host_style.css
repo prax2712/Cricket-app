@@ -4,11 +4,15 @@
     margin: 0rem;
     padding: 0rem;
 }
-
+a{
+    text-decoration: none;
+}
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: rgba(11, 11, 11, 0.8);
+/*   background-color:#2196F3; */
     z-index: -1;
+    font-weight: bold;
 }
 #matchend
 {
@@ -22,21 +26,30 @@ body {
 }
 #endmatch
 {
-    background-color:rgb(105, 216, 216);
+    background-color:rgb(11, 156, 156);
+    width:fit-content;
+    padding:5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    border-radius:5px;
+    color:#eae1e1;
 }
 #endmatch:hover{
     background-color:rgba(51, 227, 174, 0.868);
-    
+    border:2px solid black;    
 }
 .container {
+    color:white;
     max-width: 50rem;
     margin: 2.5rem auto;
     margin-top:0.625rem;
     padding: 1.25rem;
-    background-color: #fff;
+  /*   background-color: #fff; */
     border: 0.00625rem solid #ddd;
     border-radius: 0.5rem;
     box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
+    background-color: rgba(68, 99, 99, 0.3); 
+    font-weight: bold;
+    box-shadow: 5px 5px 15px rgba(29, 19, 19, 0.3);
 }
 
 h1 {
@@ -68,8 +81,8 @@ h3 {
     padding: 1.25rem;
     border: 0.00625rem solid #ddd;
     border-radius: 0.5rem;
-    background-color: #f9f9f9;
-    
+    background-color: rgba(49, 64, 64, 0.3); 
+    box-shadow: 15px 15px 15px rgba(23, 23, 23, 0.3);
 }
 
 .team-batting {
@@ -87,7 +100,7 @@ h3 {
 #overs-completed {
     font-size: 1.0rem;
     margin-left: 9.375rem;
-    color:rgb(244, 7, 7);
+    color:rgb(244, 212, 7);
 }
 .bowler-score{
     font-size: 1.25rem;
@@ -96,12 +109,17 @@ h3 {
     display: flex;
     align-items: center;
 }
+#total-score
+{
+    color:rgb(51, 233, 57);
+    font-size: larger;
+}
 .bowler-overs{
     font-size: 1.0rem;
     font-weight: bold;
     margin-bottom: 0.9375rem;
     display: flex;
-    color:rgb(244, 7, 7);
+    color:rgb(244, 212, 7);
 }
 
 .batsman-on-strike {
@@ -153,6 +171,7 @@ h3 {
 }
 #matchend{
     align-self: flex-end;
+
 }
 
 .add-runs,
@@ -212,8 +231,8 @@ h3 {
   }
   
   .strike button:hover {
-    background-color: #ebd810; 
-    color: #100f0f;
+    background-color: #085798; 
+   color:white;
     /* Darker blue */
   }
   .strike {
@@ -305,6 +324,47 @@ top:0px;
     background-color:#90d0f3;
     box-shadow: 0.125rem 0.125rem 0.125rem rgba(0,0,0,0.9);
     z-index:10;
-
-
+}
+#batsman-1{
+    width:100px;
+    padding: 5px;
+   border-radius:10px;
+}
+#batsman-2{
+    width:100px;
+    padding: 5px;
+    border-radius:10px;
+}
+#selecting-batsman-1{
+    margin-right: 3rem;
+    border-radius: 0.05rem;
+}
+#selecting-batsman-2{
+    margin-left: 3rem;
+}
+#selecting-b2-name{
+    margin-left:3rem;
+    border-radius:5px;
+    border:4px groove black;
+    color:#100f0f;
+    width:6.5rem;
+    display:flex;
+    color:#eae1e1;
+    justify-content:center;
+}
+#selecting-b1-name{
+    border-radius:5px;
+    border:4px groove black;
+    width:6.5rem;
+    display:flex;
+    color:#eae1e1;
+    justify-content:center;
+}
+#selecting-bowl-name{
+    border-radius:5px;
+    border:4px groove black;
+    width:6.5rem;
+    color:#eae1e1;
+    display:flex;
+    justify-content:center;
 }
