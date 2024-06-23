@@ -129,7 +129,7 @@ def toss(request, match_id):
         innings.objects.create(match_id=match_id, innings_no=1, 
                                batting_team=match.first_batting, bowling_team=match.first_bowling)
        
-        overs_timneline.objects.create(match_id=match_id,ball=0)
+        overs_timeline.objects.create(match_id=match_id,ball=0)
         
         return redirect("http://127.0.0.1:8000/liveHost/"+str(match.match_id)+"/", username=username)  
 
@@ -155,8 +155,8 @@ def login(request):
 
 def signup(request):
     if request.method == "POST":
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
+        first_name = request.POST.get('first_name').upper()
+        last_name = request.POST.get('last_name').upper()
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
@@ -188,12 +188,12 @@ def signup(request):
 
 def hosting(request,username):
     if request.method=='POST':
-        team1name=request.POST.get('team1name')
-        team2name=request.POST.get('team2name')
+        team1name=request.POST.get('team1name').upper()
+        team2name=request.POST.get('team2name').upper()
         date=request.POST.get('dob')
         time=request.POST.get('time')
         noovers=request.POST.get('noovers')
-        venue=request.POST.get('venue')
+        venue=request.POST.get('venue').upper()
         host_details = match_info(
                     host=username,
                     team1=team1name,
