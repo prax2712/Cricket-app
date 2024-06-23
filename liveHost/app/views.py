@@ -9,6 +9,7 @@ from django.contrib.auth.models import auth,User
 from django.contrib import messages
 from .models import player_stats,match_info
 from django.urls import reverse
+from django.contrib.auth import logout
 
 def statistics(request):
     player=None
@@ -340,3 +341,6 @@ def match_summary(request, match_id):
     }
     return render(request, 'match_summary.html', context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('/')
