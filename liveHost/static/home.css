@@ -45,13 +45,13 @@
   
   .profile-button img {
     width: 3rem;
-    height: 3rem;
+    height: 2.5rem;
     border-radius: 50%;
   }
   
   .logo img {
     width: 8rem;
-    height: 3rem;
+    height: 4rem;
     border-radius: 2%;
   }
   
@@ -234,7 +234,7 @@
   }
   #profile-info {
     position: fixed;  /* Position fixed to stay in place on scroll */
-    top: 5rem;        /* Adjust top position as needed */
+    top: 7rem;        /* Adjust top position as needed */
     right: 1rem;      /* Space from right edge */
     width: 200px;     /* Adjust width as needed */
     background-color: #fff;
