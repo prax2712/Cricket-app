@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'liveView.css' %}" />
   </head>
   <body>
+    <div class="scorecard1">
     <div class="scorecard">
       <div class="teams">
         <div class="team team-1"><span id="team1"></span></div>
@@ -42,6 +43,8 @@
           <span class="bowler-overs" id="bowler-overs">Overs:0.0</span>
         </div>
       </div>
+      <div id="need"></div>
+      <div> <br></div>
       <div>Curr Run Rate: <span id="curr-run-rate"></span></div>
       <div> <br></div>
       <div>Req Run Rate: <span id="req-run-rate">-</span></div>
@@ -69,6 +72,7 @@
     <div class="inn2-content" style="display: none">
       <div class="inn2-batting-container"></div>
       <div class="inn2-bowling-container"></div>
+    </div>
     </div>
     {{ match_id|json_script:"match-id" }}
     <script src="{% static 'liveView.js' %}"></script>
