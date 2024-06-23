@@ -37,11 +37,11 @@
       </div>
     <div id="profile-info">
       {% if player %}
-        <h2>{{ player.first_name }} {{ player.last_name }}</h2>
-        <h3>Upcoming Matches:</h3>
+        <h2 id="profile-title">{{ player.first_name }} {{ player.last_name }}</h2>
+        <h3 style="font-size:17px;">Matches:</h3>
         <ul>
         {% for match in upcoming_matches_host %}
-        <li><a href="{% url 'toss' match.match_id %}">{{ match.team1 }} vs {{ match.team2 }} ({{ match.match_date }})</a></li>
+        <li><a href="{% url 'toss' match.match_id %}" class="matches_list">{{ match.team1 }} vs {{ match.team2 }} ({{ match.match_date }})</a></li>
         {% endfor %}
         </ul>
       {% endif %}
@@ -60,18 +60,18 @@
         </div>
         <div class="tab-content" id="tab-content-upcoming">
           {% for match in upcoming_matches %}
-            <a href="/liveView/{{ match.match_id }}" class="match_link">  
-              <div class="info">
-                <p class="details">{{match.team1}} vs {{match.team2}}</p>
-                <p class="details">{{match.match_date}} at {{match.match_time}}</p>
-                <p class="details">Venue: {{match.venue}}</p>
+            <div>  
+              <div class="info-upcoming">
+                <p class="details-up">{{match.team1}} vs {{match.team2}}</p>
+                <p class="details-up">{{match.match_date}} at {{match.match_time}}</p>
+                <p class="details-up">Venue: {{match.venue}}</p>
               </div>
-            </a>
+            </div>
           {% endfor %} 
         </div>
         <div class="tab-content" id="tab-content-recent">
           {% for match in recent_matches %}
-            <a href="/liveView/{{ match.match_id }}" class="match_link">  
+            <a href="/match_summary/{{ match.match_id }}" class="match_link">  
               <div class="info">
                 <p class="details">{{match.team1}} vs {{match.team2}}</p>
                 <p class="details">{{match.match_date}} at {{match.match_time}}</p>

@@ -60,7 +60,7 @@ function buildTableBatting(containerSelector, playerData) {
       row.insertCell().textContent = player.balls;
       row.insertCell().textContent = player.fours;
       row.insertCell().textContent = player.sixes;
-      row.insertCell().textContent = player.strike_rate;
+      row.insertCell().textContent = parseFloat(player.strike_rate).toFixed(2);
     }
   });
   container.appendChild(table);
@@ -113,6 +113,9 @@ chatSocket.onerror = function (error) {
 };
 chatSocket.onmessage = function (event) {
   var data = JSON.parse(event.data);
+  if(data.match_status==3){
+    window.location.href = "/match_summary/" + match_id;
+  }
   document.getElementById("team1").textContent = data.team1;
   document.getElementById("team2").textContent = data.team2;
   document.getElementById("score-value").textContent = data.score + " ";
@@ -220,15 +223,17 @@ chatSocket.onmessage = function (event) {
   }
   document.getElementById("toss").textContent =
     data.toss_winner + " won the toss and chose to " + x + " first !";
-  innings1_score = data.innings1_score;
-  innings2_score = data.innings2_score;
   if(data.innings_no==1){
     document.getElementById("curr-run-rate").textContent = parseFloat(data.innings1_score_num/parseFloat(data.overs/6)).toFixed(2);
     
   }
   else {
-    document.getElementById("curr-run-rate").textContent = parseFloat(data.innings2_score_num/parseFloat(data.overs/6)).toFixed(2);
-    document.getElementById("req-run-rate").textContent = parseFloat((data.target - data.innings2_score_num)/parseFloat(((data.maximum_overs)*6 - data.overs)/6)).toFixed(2);
+    document.getElementById("curr-run-rate").textContent = parseFloat(data.innings1_score_num/parseFloat(data.overs/6)).toFixed(2);
+    document.getElementById("req-run-rate").textContent = parseFloat((data.target - data.innings1_score_num)/parseFloat(((data.maximum_overs)*6 - data.overs)/6)).toFixed(2);
+  }
+  console.log(data.target-data.innings1_score_num);
+  if(data.innings_no==2){
+    document.getElementById('need').textContent = "Need " + String(data.target - data.innings1_score_num) + " runs from " + String(data.maximum_overs*6 - data.overs) + " balls"; 
   }
   buildTableBatting(".inn1-batting-container", innings1DataBatting);
   buildTableBowling(".inn1-bowling-container", innings1DataBowling);
