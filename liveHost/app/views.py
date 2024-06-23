@@ -149,7 +149,7 @@ def login(request):
         print(f"Authenticated User: {user}")  
         if user is not None:
             auth.login(request,user)
-            return redirect('homepage', username=username)
+            return redirect('home', username=username)
         else:
             messages.info(request,'check your details correctly or register ')
             return redirect('login')
