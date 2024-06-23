@@ -232,7 +232,7 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 current_data.strike=c
                 current_data.save()
 
-            if (current_data.balls_bowled==(max_overs*6) or current_data.wickets==10) and current_data.innings_no==1:
+            if (current_data.balls_bowled==(max_overs*6) or current_data.wickets==(min(match_info.objects.all().filter(match_id=self.match_id)[0].no_players,11)-1)) and current_data.innings_no==1:
                 print("INNINGS IS CHANGED")
                 change_innings=1
                 player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player1_username)[0]
@@ -297,7 +297,7 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 current_data.save()
                 
 
-            if current_data.innings_no==2 and (current_data.balls_bowled== max_overs*6 or current_data.wickets==10):
+            if current_data.innings_no==2 and (current_data.balls_bowled== max_overs*6 or current_data.wickets==(min(match_info.objects.all().filter(match_id=self.match_id)[0].no_players,11)-1)):
                 match_completed = 1
                 player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player1_username)[0]
                 player_data.bowls_faced = current_data.balls_consumed_b1
@@ -548,11 +548,6 @@ class MatchView(WebsocketConsumer):
         )
 
         self.accept()
-
-    def disconnect(self, close_code):
-        async_to_sync(self.channel_layer.group_discard)(
-            self.match_group_name, self.channel_name
-        )
     def send_match_data(self):
         match = match_info.objects.get(match_id=self.match_id)  # fetch match data from model
         innings1 = innings.objects.get(match_id=self.match_id)
