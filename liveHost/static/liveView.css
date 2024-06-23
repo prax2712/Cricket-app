@@ -2,36 +2,51 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 1.25rem;
+   /*   background: linear-gradient(45deg, #474444 0%, #8f555566 100%);*/
+    
+  /*   background:radial-gradient(circle, farthest-corner, #121211,20,50,20,#fff); */
+    backdrop-filter:blur(5px);
+    
+    /* background: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+     */background-repeat: no-repeat;
+    background-color: rgba(1,1,1, 0.8);
+   
+    color:rgb(209, 204, 204);
+   
   }
-  
   .scorecard {
-    width: 37.5rem;
+    width: 37.5rem; 
     margin: auto;
     border: 0.0625rem solid #ddd;
     padding: 0.625rem;
-    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(49, 64, 64, 0.3); 
+    border-radius:10px;
+  
   }
-.scoreboard  {
-  animation: slide-in 1s ease-in-out forwards;
-}
-
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(50%);  /* Adjust for desired slide distance */
+  .scoreboard  {
+    animation: slide-in 1s ease-in-out forwards;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(50%);  /* Adjust for desired slide distance */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-}
+  
   .teams {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1.875rem;
+    
   }
   .innings1-2 {
     display: flex;
@@ -42,7 +57,11 @@ body {
   .vs {
     padding: 0.3125rem 0.625rem;
     font-weight: bold;
-    border: 0.0625rem solid #ddd;
+    font-size: larger;
+    border: 0.0725rem solid #ddd;
+    background-color: rgba(8, 35, 37,0.3);
+    color:rgb(0, 0, 0);  
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.3);
   }
   
   .vs {
@@ -78,8 +97,12 @@ body {
     padding: 0.625rem;
     border: 0.0625rem solid #ddd;
     border-radius: 0.5rem;
-    background-color: #f9f9f9;
+    background-color: rgba(8, 35, 37,0.3); 
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.3);
     margin: 1.25rem;
+    font-weight: bold;
+    color:rgb(229, 243, 245);
+
   }
   
   .score {
@@ -92,14 +115,15 @@ body {
   #score-value,
   #wickets-value,
   #overs-value {
+    font-size: larger;
     margin: 0 0.3125rem;
-    font-size: 1.125rem;
+    color: rgb(34, 204, 111);
   }
   
   #overs-value {
-    font-size: 1rem;
+    font-size: larger;
     margin-left: 9.375rem;
-    color: rgb(244, 7, 7);
+    color: rgb(34, 204, 111);
   }
   .inn1,
   .inn2 {
@@ -120,18 +144,22 @@ body {
   }
   
   .previous-balls {
-    width: 12.5rem; /* Adjust width as needed */
+    width:auto; /* Adjust width as needed */
     display: flex;
     margin: 0.625rem 0; /* Some spacing from scorecard */
+    
   }
   
   .ball {
-    width: 1.875rem;
-    height: 1.875rem;
-    border-radius: 50%;
+    min-width:1.8rem;
+    width:fit-content;
+    height:fit-content;
+    border-radius: 10%;
     background-color: #eee;
+    color:black; 
     text-align: center;
-    font-size: 14px;
+    font-size: small;
+    font-weight:bold;
     line-height: 1.875rem; /* Vertical centering */
     margin-right: 0.3125rem;
   }
@@ -143,6 +171,7 @@ body {
     padding: 0.625rem;
     box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
     display: flex;
+    font-weight: bold;
     flex-direction: column;
     align-items: center;
     margin-bottom: 0.625rem;
@@ -158,8 +187,13 @@ body {
   th {
     border: 0.0625rem solid #ddd;
     padding: 0.5rem;
+    background-color: rgba(8, 35, 37,0.3);
+    color:#eee;
   }
-  
+  /* th{
+    background-color:rgba(224, 53, 6, 0.3);
+    color:#7e1717;
+  } */
   .inn1,
   .inn2 {
     font-weight: bold; /* Make the text bolder */
@@ -167,12 +201,14 @@ body {
     border: 0.125rem solid #ddd; /* Add a border  */
     padding: 0.625rem 1.25rem; /* Add padding */
     border-radius: 0.3125rem; /* Add some rounded corners */
-    background-color: #f0f0f0; /*  Light background color */
+     /*  Light background color */
     margin: 1.25rem;
+    background-color: rgba(8, 35, 37,0.3); 
   }
   
   /* Optional hover effect */
   .inn1:hover,
   .inn2:hover {
-    background-color: #ddd; /* Slightly darker background on hover */
+    background-color: rgba(8, 35, 37,0.8);  /* Slightly darker background on hover */
+    color:rgb(252, 252, 252);
   }
