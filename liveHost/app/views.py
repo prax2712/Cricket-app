@@ -98,6 +98,7 @@ def player_selection(request, match_id):
              match.save()
              username = match.host
              return redirect('home', username=username) 
+    return render(request,'player_selection.html')
 
 from django.http import JsonResponse
 
