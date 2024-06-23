@@ -1,14 +1,10 @@
-from . models import innings,match_info,player_match_stats
-from django.http import HttpResponse
+from . models import *
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from . models import player_stats,player_match_stats
 from django.db.models import Q 
-from django.shortcuts import render, HttpResponse, redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import auth,User
 from django.contrib import messages
-from .models import player_stats,match_info
-from django.urls import reverse
 from django.contrib.auth import logout
 
 def statistics(request):
@@ -133,7 +129,7 @@ def toss(request, match_id):
         innings.objects.create(match_id=match_id, innings_no=1, 
                                batting_team=match.first_batting, bowling_team=match.first_bowling)
        
-             
+        overs_timneline.objects.create(match_id=match_id,ball=0)
         
         return redirect("http://127.0.0.1:8000/liveHost/"+str(match.match_id)+"/", username=username)  
 
