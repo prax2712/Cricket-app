@@ -15,18 +15,15 @@
         <button id="flip-button">
             Flip Coin
         </button>
-        <button id="reset-button">
-            Reset
-        </button>
     </div>
 </div>
-<div>
 <h2>Toss</h2>
 
 <form method="POST">
     {% csrf_token %}
-    
+    <div>
     <p>{{ match.team1 }}<span> vs </span>{{ match.team2 }}</p>
+    <br>
     <label for="toss_winner">Toss Winner:</label>
     <select name="toss_winner" id="toss_winner">
         <option value="{{ match.team1 }}">{{ match.team1 }}</option>
@@ -40,9 +37,8 @@
     </select>
 
     <button type="submit" id="butt">Start</button>
-
-</form>
 </div>
+</form>
 </div>
 <script src="{% static 'toss.js' %}"></script>
 </body>
