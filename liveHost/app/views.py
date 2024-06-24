@@ -140,7 +140,7 @@ def toss(request, match_id):
        
         overs_timeline.objects.create(match_id=match_id,ball=0)
         
-        return redirect("http://127.0.0.1:8000/liveHost/"+str(match.match_id)+"/", username=username)  
+        return redirect("http://howzthat.pythonanywhere.com/liveHost/"+str(match.match_id)+"/", username=username)  
 
     return render(request, 'toss.html', {'match': match})
 
@@ -285,7 +285,7 @@ def homepage(request, username):
     live_matches = match_info.objects.filter(status=2)
     recent_matches = match_info.objects.filter(status=3)
     recent_matches = recent_matches | match_info.objects.filter(status=4)
-    direct = "http://127.0.0.1:8000/hosting/"+str(player.username)+"/"
+    direct = "http://howzthat.pythonanywhere.com/hosting/"+str(player.username)+"/"
     print(direct)
     
     context = {
