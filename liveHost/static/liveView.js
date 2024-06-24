@@ -98,7 +98,7 @@ var innings2DataBowling = [];
 const match_id = JSON.parse(document.getElementById("match-id").textContent);
 
 const chatSocket = new WebSocket(
-  "ws://" + window.location.host + "/ws/match/" + match_id + "/"
+  "wss://" + window.location.host + "/ws/match/" + match_id + "/"
 );
 function sendMessage() {
   chatSocket.send("hello");
