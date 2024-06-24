@@ -308,6 +308,7 @@ def homepageNonUser(request):
     upcoming_matches = match_info.objects.filter(status=1)
     live_matches = match_info.objects.filter(status=2)
     recent_matches = match_info.objects.filter(status=3)
+    recent_matches = recent_matches | match_info.objects.filter(status=4)
     context = {
         'upcoming_matches' : upcoming_matches,
         'recent_matches' : recent_matches,
