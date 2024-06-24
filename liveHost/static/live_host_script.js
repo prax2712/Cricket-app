@@ -67,7 +67,7 @@ const team_2 = JSON.parse(document.getElementById("team2").textContent)
 document.title = team_1 + " vs " + team_2;
 //web socket connection
 
-ws = new WebSocket("ws://"+window.location.host+"/liveHost/"+match_id+"/");
+ws = new WebSocket("wss://"+window.location.host+"/liveHost/"+match_id+"/");
 
 
 let old_batsman_score;
