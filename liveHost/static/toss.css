@@ -1,47 +1,59 @@
 /* General Page Styling */
 body {
     font-family: sans-serif; /* Choose a modern font */
-    display: flex; /* Center content using Flexbox */
+    display: flex; 
     flex-direction: column; 
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f4f4f4; /* Light background for better contrast */
+    min-height: 100vh; 
+    background-color:rgba(40, 40, 40, 0.848); /* Light background for better contrast */
     margin: 0; /* Remove default body margin */
 }
 
 h2 {
-    color: #333; /* Darker text for headings */
+    position:absolute;
+    top:50px;
+    color: #f4f1f1; /* Darker text for headings */
     text-align: center;
 }
 
 /* Form Container Styling */
 form {
-    background-color: #fff;
-    padding: 30px;
+    position:absolute;
+    top:370px;
+    font-size: 25px;
+    background-color: rgba(225, 225, 225, 0.3);
+    padding-bottom: 40px;
+    padding-top: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    box-shadow: 3px 2px 5px rgba(49, 64, 65, 0.3); /* Subtle shadow effect */
     text-align: center; /* Align labels and inputs to the center */
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
+    font:200px;
+    margin-bottom: 16px;
     font-weight: bold;
 }
 
 select { /* Removed styling from button */
+    font-size: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 /* Button Styling (Now separate) */
-button {
+#butt {
     display: block;  /* Make button take full width */
-    width: 100%;     /* Occupy full container width */
-    padding: 30px;
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 30px;     /* Occupy full container width */
+    padding: 10px;
     border: none;   /* Remove default button border */
     border-radius: 4px;
     background-color: #4CAF50; 
@@ -50,6 +62,105 @@ button {
     transition: background-color 0.3s; 
 }
 
-button:hover {
+#butt:hover {
     background-color: #45a049; 
+}
+
+p{
+    color: gold;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+span{
+    color: rgb(82, 193, 230);
+}
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap'); */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+.container{
+    
+    width: 400px;
+    padding: 50px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 200px;
+    left: 50%;
+    border-radius: 10px;
+    -webkit-perspective: 300px;
+    perspective: 300px;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+   align-items: center;
+}
+.coin{
+    height: 150px;
+    width: 150px;
+    position: relative;
+    margin: 50px auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.tails{
+    transform: rotateX(180deg);
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.coin img{
+    width: 145px;
+}
+.heads, .tails{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+#outer-container{
+    display:flex;
+    justify-content: center;
+}
+button{
+    width: 120px;
+    padding: 10px 0;
+    border: 2.5px solid #424ae0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#flip-button{
+    background: #424ae0;
+    color: #fff;
+    
+}
+#flip-button:disabled{
+    background-color: #e1e0ee;
+    color: #101020;
+    border-color: #e1e0ee;
+}
+
+@keyframes spin-tails{
+    0%{
+        transform: rotateX(0);
+    }
+    100%{
+        transform: rotateX(1980deg);
+    }
+}
+
+@keyframes spin-heads{
+    0%{
+        transform: rotateX(0);
+    }
+    100%{
+        transform: rotateX(2160deg);
+    }
 }

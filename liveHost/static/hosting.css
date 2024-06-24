@@ -2,16 +2,23 @@
 {
     margin:1.875rem;
     font-size: 1.25rem;
+   
+}
+body{
+    background-color:rgba(135, 134, 134, 0.6);
 }
 .buttons
 {
     border-radius:0.4375rem; 
-    height:1.562rem;
-    
+    height:2rem;
+    width:5rem;
+    color:white;
+    font-size: medium;
+    background-color:rgb(3, 40, 43);
     box-shadow: 0.625rem 0.625rem 0.625rem  rgba(0, 0, 0, 0.1);
 }
 .buttons:hover{
-    background-color:rgb(113, 155, 176);
+    background-color:rgb(5, 110, 121);
 }
 .input
 {
@@ -20,18 +27,23 @@
     margin-left:0.9375rem;
     height:1.5625rem;
     box-shadow: 0.3% 0.3% 0.5% rgba(0, 0, 0, 0.3);
+   
 }
 #Start{
     display:flex;
     justify-content: center;
+    
 }
 
 #outer-container
 {
+    /* display: flex;
+    justify-content: center; */
+    
     border-radius:0.625rem;
     box-shadow: 0.3125rem 0.3125rem 6.25rem rgba(0, 0, 0, 0.3);
-    
-
+    background-color:rgb(239, 240, 241);
+   /*  font-weight: bold; */
 }
 #outermost
 {
@@ -41,5 +53,9 @@
     justify-content:center;
     align-items: center;
     width:100%;
-
+}
+#logo-image
+{
+    height:6rem;
+    width:10.5rem;
 }

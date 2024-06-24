@@ -172,12 +172,12 @@ const change_strike = function(){
     {
       
       document.getElementById("batsman-2").style.backgroundColor = "rgba(20,200,200,0.4)";
-      document.getElementById("batsman-1").style.backgroundColor = "white";
+      document.getElementById("batsman-1").style.backgroundColor ="rgba(49, 64, 64, 0.3)" ;
       current_strike = document.getElementById("batsman-2").dataset.value;
     }
     else{
       document.getElementById("batsman-1").style.backgroundColor = "rgba(20,200,200,0.4)";
-      document.getElementById("batsman-2").style.backgroundColor = "white";
+      document.getElementById("batsman-2").style.backgroundColor = "rgba(49, 64, 64, 0.3)";
       current_strike = document.getElementById("batsman-1").dataset.value;
     }
     
@@ -426,15 +426,15 @@ if(current_data.strike==1)
   {
     current_strike = batsman1;
     document.getElementById("batsman-1").style.backgroundColor = "rgba(20,200,200,0.4)";
-    document.getElementById("batsman-2").style.backgroundColor = "rgba(255,255,255)";
+    document.getElementById("batsman-2").style.backgroundColor = "rgba(49, 64, 64, 0.3)";
 
   }
   else{
     current_strike = batsman2;
     document.getElementById("batsman-2").style.backgroundColor = "rgba(20,200,200,0.4)";
-    document.getElementById("batsman-1").style.backgroundColor = "rgba(255,255,255)";
+    document.getElementById("batsman-1").style.backgroundColor = "rgba(49, 64, 64, 0.3)";
   }
-  console.log(current_strike,"helo");
+  
 if(current_data.change_innings==1)
   {
     window.location.reload();
@@ -464,4 +464,4 @@ for(let i=0;i<op.length;i++)
         }
     }
 }
-
+console.log("Iam at the end");

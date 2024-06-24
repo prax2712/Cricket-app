@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Match Summary</title>
+    <style>
+        body { background-color: #181818; color: white; font-family: sans-serif; text-align: center; }
+        .container { display: flex; justify-content: space-around; align-items: center; padding: 20px; }
+        .team-info { text-align: center; }
+        .score { font-size: 24px; font-weight: bold; margin-bottom: 5px; }
+        .overs { font-size: 14px; } 
+        .result { margin-top: 20px; font-size: 24px; margin-bottom: 20px;}
+        .button {margin:10px;font-size: 20px;}
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+        } 
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="team-info">
+            <h2>{{ match.team1 }}</h2>
+            <div class="score">{{ team1_score }}</div>
+            <div class="overs">({{ innings1_overs }})</div>
+        </div>
+
+        <div class="team-info">
+            <h2>{{ match.team2 }}</h2>
+            <div class="score">{{ team2_score }}</div>
+            <div class="overs">({{ innings2_overs}})</div>
+        </div>
+    </div>
+
+    <div class="result">{{ result }}</div> 
+    <button class="button" onclick="showInnings(1)">Innings 1</button>
+    <button class="button" onclick="showInnings(2)">Innings 2</button>
+
+    <div id="innings1" style="display: none;">
+        <h2>Innings 1 Batting</h2>
+        <table>
+            <tr><th>Player</th><th>Runs</th><th>Balls</th><th>4s</th><th>6s</th><th>SR</th></tr>
+            {% for row in innings1_batting %}
+                <tr>{% for item in row %}<td>{{ item }}</td>{% endfor %}</tr>
+            {% endfor %}
+        </table>
+
+        <h2>Innings 1 Bowling</h2>
+        <table>
+            <tr><th>Player</th><th>Overs</th><th>Runs</th><th>Wickets</th><th>Econ</th></tr>
+            {% for row in innings1_bowling %}
+                <tr>{% for item in row %}<td>{{ item }}</td>{% endfor %}</tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="innings2" style="display: none;">
+        <h2>Innings 2 Batting</h2>
+        <table>
+            <tr><th>Player</th><th>Runs</th><th>Balls</th><th>4s</th><th>6s</th><th>SR</th></tr>
+            {% for row in innings2_batting %}
+                <tr>{% for item in row %}<td>{{ item }}</td>{% endfor %}</tr>
+            {% endfor %}
+        </table>
+
+        <h2>Innings 2 Bowling</h2>
+        <table>
+            <tr><th>Player</th><th>Overs</th><th>Runs</th><th>Wickets</th><th>Econ</th></tr>
+            {% for row in innings2_bowling %}
+                <tr>{% for item in row %}<td>{{ item }}</td>{% endfor %}</tr>
+            {% endfor %}
+        </table>
+        </div>
+
+        <script>
+            function showInnings(inningsNumber) {
+                document.getElementById('innings1').style.display = inningsNumber === 1 ? 'block' : 'none';
+                document.getElementById('innings2').style.display = inningsNumber === 2 ? 'block' : 'none';
+            }
+        </script>
+
+</body>
+</html>

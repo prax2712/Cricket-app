@@ -9,7 +9,9 @@
 </head>
 <body>
     <div id="outermost">
-    <div id="outer-container">
+        <div id="outer-container">
+        <div style="display:flex;justify-content: center;"><img id="logo-image" src="{% static 'Logo.png' %}"></div>
+        <div>
         <form method="POST">
             {% csrf_token %}
             <div class="inner" id="team1Name-outer">
@@ -41,6 +43,7 @@
             </div>
             <p id="message"></p>
         </form>
+        </div>
     </div>
     </div>
     <script src="{% static 'hosting.js' %}"></script>

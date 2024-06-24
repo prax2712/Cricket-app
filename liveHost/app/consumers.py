@@ -9,7 +9,7 @@ from django.db.models import Prefetch
 class LiveHostWebsocket(JsonWebsocketConsumer):
     def change_ball(s):
         if "1" in s:
-            s.replace("1","")
+            s.replace("1","0")
             return s
         elif "2" in s:
             s.replace("2","1")
@@ -168,27 +168,27 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 
             print("curent strike =",current_data.strike)
             
-            current_data.runs_scored = current_data.runs_scored+score
-            current_data.balls_bowler_bowled = current_data.balls_bowler_bowled + int(content['add_ball'])
-            current_data.balls_bowled = current_data.balls_bowled+int(content['add_ball'])
-            current_data.runs_conceded = current_data.runs_conceded+int(content['score'])
+            current_data.runs_scored =max(0,current_data.runs_scored+score)
+            current_data.balls_bowler_bowled = max(0,current_data.balls_bowler_bowled + int(content['add_ball']))
+            current_data.balls_bowled = max(0,current_data.balls_bowled+int(content['add_ball']))
+            current_data.runs_conceded = max(0,current_data.runs_conceded+int(content['score']))
             if current_data.player1_username == content['current_strike']:
-                current_data.balls_consumed_b1 = current_data.balls_consumed_b1 + int(content['add_ball'])
-                current_data.score_b1 = current_data.score_b1+int(content['score'])
+                current_data.balls_consumed_b1 = max(0,current_data.balls_consumed_b1 + int(content['add_ball']))
+                current_data.score_b1 = max(0,current_data.score_b1+int(content['score']))
                 if int(content['score'])==4:
                     current_data.fours_b1=current_data.fours_b1+1
                 elif int(content['score'])==6:
                     current_data.sixes_b1=current_data.sixes_b1+1
                 print("hello1")
             else :
-                current_data.balls_consumed_b2 = current_data.balls_consumed_b2 + int(content['add_ball'])
-                current_data.score_b2 = current_data.score_b2+int(content['score'])
+                current_data.balls_consumed_b2 = max(0,current_data.balls_consumed_b2 + int(content['add_ball']))
+                current_data.score_b2 = max(0,current_data.score_b2+int(content['score']))
                 if int(content['score'])==4:
                     current_data.fours_b2=current_data.fours_b2+1
                 elif int(content['score'])==6:
                     current_data.sixes_b2=current_data.sixes_b2+1
                 print("hello2")
-            if content['run_out_b1']==1 or content['run_out_b1']==1 :
+            if content['run_out_b1']==1 or content['run_out_b2']==1 :
                 
                 current_data.runs_scored = current_data.runs_scored+int(content['extra'])
                 current_data.wickets=current_data.wickets+1
@@ -218,8 +218,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 #current_data.runs_conceded = current_data.runs_conceded+int(content['extra'])
                 current_data.save() 
 
-            current_data.wickets=current_data.wickets+content['wickets']
-            current_data.wickets_conceded = current_data.wickets_conceded+content['wickets']
+            current_data.wickets=max(0,current_data.wickets+content['wickets'])
+            current_data.wickets_conceded = max(0,current_data.wickets_conceded+content['wickets'])
             current_data.save()
             if current_data.balls_bowled>0 and current_data.balls_bowled%6==0 and int(content['add_ball']==1):
                 c=0
@@ -232,32 +232,31 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 current_data.strike=c
                 current_data.save()
 
-            if (current_data.balls_bowled==(max_overs*6) or current_data.wickets==10) and current_data.innings_no==1:
+            if (current_data.balls_bowled==(max_overs*6) or current_data.wickets==(min(match_info.objects.all().filter(match_id=self.match_id)[0].no_players,11)-1)) and current_data.innings_no==1:
                 print("INNINGS IS CHANGED")
                 change_innings=1
                 player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player1_username)[0]
                 player_data.bowls_faced = current_data.balls_consumed_b1
                 player_data.runs_scored = current_data.score_b1
-                player_data.fours = current_data.fours_b2
-                player_data.sixes = current_data.sixes_b2
+                player_data.fours = current_data.fours_b1
+                player_data.sixes = current_data.sixes_b1
                 match_first = match_info.objects.all().filter(match_id = self.match_id)[0]
                 match_first.innings1_score = current_data.runs_scored
                 match_first.innings1_wickets = current_data.wickets
                 match_first.innings1_overs = current_data.balls_bowled
                 match_first.save()
-
                 if current_data.balls_consumed_b1>0:
                     player_data.strike_rate = (current_data.score_b1*100)/current_data.balls_consumed_b1
                 else:
                     player_data.strike_rate=0
                 player_data.save()
                 player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player2_username)[0]
-                player_data.bowls_faced = current_data.balls_consumed_b1
-                player_data.runs_scored = current_data.score_b1
-                player_data.fours = current_data.fours_b1
-                player_data.sixes = current_data.sixes_b1
-                if current_data.balls_consumed_b1>0:
-                    player_data.strike_rate = (current_data.score_b1*100)/current_data.balls_consumed_b1
+                player_data.bowls_faced = current_data.balls_consumed_b2
+                player_data.runs_scored = current_data.score_b2
+                player_data.fours = current_data.fours_b2
+                player_data.sixes = current_data.sixes_b2
+                if current_data.balls_consumed_b2>0:
+                    player_data.strike_rate = (current_data.score_b2*100)/current_data.balls_consumed_b2
                 else:
                     player_data.strike_rate=0
                 player_data.save()
@@ -266,8 +265,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 player_data.runs_conceded = current_data.runs_conceded
                 player_data.wickets = current_data.wickets_conceded
                 player_data.save()
-                if current_data.balls_bowler_bowled//6 >0:  
-                    player_data.economy = current_data.runs_conceded/(current_data.balls_bowler_bowled//6)
+                if current_data.balls_bowler_bowled >0:  
+                    player_data.economy = (current_data.runs_conceded*6)/(current_data.balls_bowler_bowled)
                 else:
                     player_data.economy=0
                 player_data.save()
@@ -297,19 +296,9 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 current_data.save()
                 
 
-            if current_data.innings_no==2 and (current_data.balls_bowled== max_overs*6 or current_data.wickets==10):
+            if current_data.innings_no==2 and (current_data.runs_scored >= current_data.target or current_data.balls_bowled== max_overs*6 or current_data.wickets==(min(match_info.objects.all().filter(match_id=self.match_id)[0].no_players,11)-1)):
                 match_completed = 1
                 player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player1_username)[0]
-                player_data.bowls_faced = current_data.balls_consumed_b1
-                player_data.runs_scored = current_data.score_b1
-                player_data.fours = current_data.fours_b2
-                player_data.sixes = current_data.sixes_b2
-                if current_data.balls_consumed_b1>0:
-                    player_data.strike_rate = (current_data.score_b1*100)/current_data.balls_consumed_b1
-                else:
-                    player_data.strike_rate=0
-                player_data.save()
-                player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player2_username)[0]
                 player_data.bowls_faced = current_data.balls_consumed_b1
                 player_data.runs_scored = current_data.score_b1
                 player_data.fours = current_data.fours_b1
@@ -319,13 +308,23 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 else:
                     player_data.strike_rate=0
                 player_data.save()
+                player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.player2_username)[0]
+                player_data.bowls_faced = current_data.balls_consumed_b2
+                player_data.runs_scored = current_data.score_b2
+                player_data.fours = current_data.fours_b2
+                player_data.sixes = current_data.sixes_b2
+                if current_data.balls_consumed_b2>0:
+                    player_data.strike_rate = (current_data.score_b2*100)/current_data.balls_consumed_b2
+                else:
+                    player_data.strike_rate=0
+                player_data.save()
                 player_data = player_match_stats.objects.all().filter(match_id=self.match_id,username=current_data.bowler_username)[0]
                 player_data.bowls_bowled = current_data.balls_bowler_bowled
                 player_data.runs_conceded = current_data.runs_conceded
                 player_data.wickets = current_data.wickets_conceded
                 player_data.save()
                 if current_data.balls_bowler_bowled>0:  
-                    player_data.economy = current_data.runs_conceded/(current_data.balls_bowler_bowled//6)
+                    player_data.economy = (current_data.runs_conceded*6)/(current_data.balls_bowler_bowled)
                 else:
                     player_data.economy=0
                 player_data.save()
@@ -364,8 +363,10 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 mat.innings2_overs = current_data.balls_bowled
                 if(mat.innings1_score>mat.innings2_score):
                     mat.match_winner = mat.first_batting
-                else:
+                elif(mat.innings1_score<mat.innings2_score):
                     mat.match_winner = mat.first_bowling
+                else:
+                    mat.match_winner = "MATCH TIE"
                 mat.save()
                     
             
@@ -386,31 +387,31 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 match over_line.ball:
                     case 0:
                         if content['noball']==1:
-                            over_line.ball1 = over_line.ball1+" NB"
+                            over_line.ball1 = over_line.ball1+str(content['extra'])+"NB"
                         elif content['wide_ball']==1:
-                            over_line.first = over_line.ball1+" WB"
+                            over_line.first = over_line.ball1+str(content['extra'])+" WB"
                         elif content['byes']==1:
                             over_line.ball1 = over_line.ball1+str(content['extra'])+"LB "
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball1 = over_line.ball1+" W"
                         elif content['wickets']==-1:
                             over_line.ball1 = over_line.ball2.replace("W","")
-                        elif int(content['add_ball'])>1 or int(content['score'])>0:
+                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
                                 over_line.ball1 = over_line.ball1+" "+str(int(content['score']))
 
                             
                     case 1:
                         if content['noball']==1:
-                            over_line.ball2 = over_line.ball2+" NB"
+                            over_line.ball2 = over_line.ball2+str(content['extra'])+"NB"
                         elif content['wide_ball']==1:
-                            over_line.ball2 = over_line.ball2+" WB"
+                            over_line.ball2 = over_line.ball2+str(content['extra'])+" WB"
                         elif content['byes']==1:
                             over_line.ball2 = over_line.ball2+str(content['extra'])+"LB "
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball2 = over_line.ball2+" W"
                         elif content['wickets']==-1:
                             over_line.ball1 = over_line.ball2.replace("W","")
-                        elif int(content['add_ball'])>1 or int(content['score'])>0:
+                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
                             over_line.ball2 = over_line.ball2+" "+str(int(content['score']))
                         elif int(content['score'])<0:
                             over_line.ball1 = self.change_ball(over_line.ball1)
@@ -418,62 +419,62 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
 
                     case 2:
                         if content['noball']==1:
-                            over_line.ball3 = over_line.ball3+" NB"
+                            over_line.ball3 = over_line.ball3+str(content['extra'])+"NB"
                         elif content['wide_ball']==1:
-                            over_line.ball3 = over_line.ball3+" WB"
+                            over_line.ball3 = over_line.ball3+str(content['extra'])+" WB"
                         elif content['byes']==1:
                             over_line.ball3 = over_line.ball3+str(content['extra'])+"LB "
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball3 = over_line.ball3+" W"
                         elif content['wickets']==-1:
                             over_line.ball2 = over_line.ball3.replace("W","")
-                        elif int(content['add_ball'])>1 or int(content['score'])>0:
+                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
                             over_line.ball3 = over_line.ball3+" "+str(int(content['score']))
                         elif int(content['score'])<0:
                             over_line.ball2 = self.change_ball(over_line.ball2)
                         
                     case 3:
                         if content['noball']==1:
-                            over_line.ball4 = over_line.ball4+" NB"
+                            over_line.ball4 = over_line.ball4+str(content['extra'])+"NB"
                         elif content['wide_ball']==1:
-                            over_line.ball4 = over_line.ball4+" WB"
+                            over_line.ball4 = over_line.ball4+str(content['extra'])+" WB"
                         elif content['byes']==1:
                             over_line.ball4 = over_line.ball4+str(content['extra'])+"LB "
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball4 = over_line.ball4+" W"
                         elif content['wickets']==-1:
                             over_line.ball3 = over_line.ball3.replace("W","")
-                        elif int(content['add_ball'])>1 or int(content['score'])>0:
+                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
                             over_line.ball4 = over_line.ball4+" "+str(int(content['score']))
                         elif int(content['score'])<0:
                             over_line.ball3 = self.change_ball(over_line.ball3)
                     case 4:
                         if content['noball']==1:
-                            over_line.ball5 = over_line.ball5+" NB"
+                            over_line.ball5 = over_line.ball5+str(content['extra'])+"NB"
                         elif content['wide_ball']==1:
-                            over_line.ball5 = over_line.ball5+" WB"
+                            over_line.ball5 = over_line.ball5+str(content['extra'])+" WB"
                         elif content['byes']==1:
                             over_line.ball5 = over_line.ball5+str(content['extra'])+"LB "
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball5 = over_line.ball5+" W"
                         elif content['wickets']==-1:
                             over_line.ball4 = over_line.ball4.replace("W","")
-                        elif int(content['add_ball'])>1 or int(content['score'])>0:
+                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
                             over_line.ball5 = over_line.ball5+" "+str(int(content['score']))
                         elif int(content['score'])<0:
                             over_line.ball4 = self.change_ball(over_line.ball4)
                     case 5:
                         if content['noball']==1:
-                            over_line.ball6 = over_line.ball6+" NB"
+                            over_line.ball6 = over_line.ball6+str(content['extra'])+"NB"
                         elif content['wide_ball']==1:
-                            over_line.ball6 = over_line.ball6+" WB"
+                            over_line.ball6 = over_line.ball6+str(content['extra'])+" WB"
                         elif content['byes']==1:
                             over_line.ball6 = over_line.ball6+str(content['extra'])+"LB "
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball6 = over_line.ball6+" W"
                         elif content['wickets']==-1:
                             over_line.ball5 = over_line.ball5.replace("W","")
-                        elif int(content['add_ball'])>1 or int(content['score'])>0:
+                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
                             over_line.ball6 = over_line.ball6+" "+str(int(content['score']))
                         elif int(content['score'])<0:
                             over_line.ball5 = self.change_ball(over_line.ball5)
@@ -536,29 +537,21 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
             if match_completed ==1:
                 self.close()
                 print("match is ended")
+            if content['end_match']==1:
+                mat = match_info.objects.all().filter(match_id = self.match_id)[0]
+                mat.status = 3
+                mat.save()
 
 class MatchView(WebsocketConsumer):
     def connect(self):
         self.match_id = self.scope["url_route"]["kwargs"]["match_id"]
-        self.match_group_name = f"match_{self.match_id}"
-
-        # Join room group
-        async_to_sync(self.channel_layer.group_add)(
-            self.match_group_name, self.channel_name
-        )
-
         self.accept()
-
-    def disconnect(self, close_code):
-        async_to_sync(self.channel_layer.group_discard)(
-            self.match_group_name, self.channel_name
-        )
     def send_match_data(self):
         match = match_info.objects.get(match_id=self.match_id)  # fetch match data from model
         innings1 = innings.objects.get(match_id=self.match_id)
-        batter1_name = player_match_stats.objects.get(username=innings1.player1_username)
-        batter2_name = player_match_stats.objects.get(username=innings1.player2_username)
-        bowler_name = player_match_stats.objects.get(username=innings1.bowler_username)
+        batter1_name = player_match_stats.objects.get(match_id = self.match_id,username=innings1.player1_username)
+        batter2_name = player_match_stats.objects.get(match_id = self.match_id,username=innings1.player2_username)
+        bowler_name = player_match_stats.objects.get(match_id = self.match_id,username=innings1.bowler_username)
         overs = overs_timeline.objects.get(match_id=self.match_id)
         team1_players = player_match_stats.objects.filter(team_name=match.team1,match_id=self.match_id)
         team1_list = []
@@ -598,7 +591,11 @@ class MatchView(WebsocketConsumer):
             'first_batting': match.first_batting,
             'toss_winner': match.toss_winner,
             'maximum_overs': match.maximum_overs,
+            'match_status': match.status,
             'innings_no': innings1.innings_no,
+            'innings1_score_num': innings1.runs_scored,
+            'innings1_overs_num': match.innings1_overs,
+            'innings2_overs_num': match.innings2_overs,
             'innings1_score': "Score: " + str(match.innings1_score) + "/" + str(match.innings1_wickets) + " (" + str(str(int(match.innings1_overs/6)) + "." + str(match.innings1_overs%6)) + ")",
             'innings2_score': "Score: " + str(match.innings2_score) + "/" + str(match.innings2_wickets) + " (" + str(str(int(match.innings2_overs/6)) + "." + str(match.innings2_overs%6)) + ")",
             'score': innings1.runs_scored,

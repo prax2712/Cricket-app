@@ -9,16 +9,18 @@
 </head>
 <body>
   <div id="layer">hi</div>
-    <div id="matchend" ><button id="endmatch" value="endmatch"><a href="/">Endmatch</a></button></div>
+    <div id="matchend" ><button id="endmatch" value="endmatch"><a href="/{{host}}/" style="color:#050505;font-weight: bold;">END MATCH</a></button></div>
   <div class="container">
-  <h1>{{team1}} <span> VS </span>{{team2}}</h1>
+    <div style="display:flex;justify-content: center;">
+  <h1 style="color:aquamarine; display:inline;">{{team1}}</h1><span style="margin-left:25px;margin-right:25px;font-weight: bold;font-size:x-large;color:rgb(248, 87, 87)"> VS </span><h1 style="color:aquamarine;display:inline;">{{team2}}</h1>
+</div>
   <div class="scoreboard">
     <div class="team-batting">
       <h2 id="bating-team-name">{{bating_team}}</h2>
       <div class="score">
         <span id="total-score">0</span>
-        <span>/</span>
-        <span id="total-wickets">0</span>
+        <span style="margin-left:3px;margin-right:3px;">/</span>
+        <span id="total-wickets" style="color:rgb(51, 233, 57);">0</span>
         <span id="overs-completed">Overs:0.0</span>
       </div>
       <div class="batsman-on-strike">
@@ -49,15 +51,18 @@
  
   <div class="selecting-player selecting-batsman">
 
-    </select>
+    
+   <div>
+    <div id="selecting-b1-name">BATSMAN 1</div>
     <select id="selecting-batsman-1" value="hello">
-      
     {% for i,j in batsmans1 %}
     
         <option class="baters-1" value ={{j}}>{{i}}</option>
     {% endfor %}
   </select>
-</select>
+</div>
+<div>
+<div id="selecting-b2-name">BATSMAN 2</div>
 <select id="selecting-batsman-2" value="hello">
   
 {% for i,j in batsmans2 %}
@@ -65,15 +70,19 @@
     <option class="baters-2" value ={{j}}>{{i}}</option>
 {% endfor %}
 </select>
+</div>
   </div>
 
   <div class="selecting-player selecting-bowler">
+    <div >
+      <div id="selecting-bowl-name">BOWLER</div>
     <select id="selecting-bowler">
      {% for i,j in bowlers %}
         <option value={{j}}>{{i}}</option>
     {% endfor %}
       <!-- Add more options as needed -->
     </select>
+  </div>
   </div>
   <div class="actions">
     <div class="runs">

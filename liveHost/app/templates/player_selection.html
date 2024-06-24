@@ -11,6 +11,25 @@
    <div class="container">
        <form method="post">
         {%csrf_token%}
+       <div class="dropdown-container">
+            <label for="no_players">Number of players in each team:</label>
+            <select id="no_players" name="no_players">
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+</select>
+</div>
+        {%if no_players%}
+        <h2>Enter correct number of players</h2>
+        {%endif%}
         {%if duplicates%}
         <h2>Duplicate player names entered please check.</h2>
         {%endif%}
