@@ -67,7 +67,7 @@ const team_2 = JSON.parse(document.getElementById("team2").textContent)
 document.title = team_1 + " vs " + team_2;
 //web socket connection
 
-ws = new WebSocket('ws://127.0.0.1:8000/liveHost/'+match_id+'/');
+ws = new WebSocket('ws://http://howzthat.pythonanywhere.com/liveHost/'+match_id+'/');
 
 
 let old_batsman_score;
@@ -253,7 +253,7 @@ document.getElementById("endmatch").onclick=function(){
   end_match=1;
   send_message();
   window.location.reload();
-  window.location.href="http://127.0.0.1:8000/"+document.getElementById("endmatch").value+"/"
+  window.location.href="http://http://howzthat.pythonanywhere.com/"+document.getElementById("endmatch").value+"/"
   }
   else{
     console.log("clicked on cancel");
@@ -389,7 +389,7 @@ ws.onmessage = function(event){
   console.log(current_data.current_score);
   if(current_data.match_completed==1)
     {
-      window.location.href="http://127.0.0.1:8000/match_summary/"+match_id+"/";
+      window.location.href="http://http://howzthat.pythonanywhere.com/match_summary/"+match_id+"/";
     }
   document.getElementById("total-score").innerHTML=current_data.current_score;//updating total score of bating team
 document.getElementById("bating-team-name").textContent = current_data.bating_team;
