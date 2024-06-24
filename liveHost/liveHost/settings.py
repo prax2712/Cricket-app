@@ -82,11 +82,11 @@ ASGI_APPLICATION = 'liveHost.asgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'howzthat$default',  
+        'NAME': 'howzthat$default',
         'USER': 'howzthat',
         'PASSWORD': 'database@304',
         'HOST': 'howzthat.mysql.pythonanywhere-services.com',  # Your MySQL hostname
-        'PORT': '3306',   
+        'PORT': '3306',
     }
 }
 
@@ -127,6 +127,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+#STATIC_ROOT = '/home/howzthat/howzthat/Cricket-app/liveHost/static'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
