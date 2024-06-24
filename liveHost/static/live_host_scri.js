@@ -86,7 +86,6 @@ const send_message = function(start){
     'wide_ball':wide_ball,
     'extra':extra,
     'byes':byes,
-    'over_throw':over_throw,
     'noball':noball,
     'batsman1':batsman1,
     'batsman2':batsman2,
@@ -221,6 +220,7 @@ document.getElementById("dec_ball_1").onclick = function(){
 
 document.getElementById("dec_wicket_1").onclick = function(){
   current_wicket=-1;
+  add_ball=-1;
   send_message()
 }
 let list = document.querySelectorAll(".add-runs");
@@ -353,22 +353,6 @@ document.getElementById("wide").onclick = function()
 
 //Handling over throw button
 
-document.getElementById("overthrow").onclick = function()
-{
-  let fag=1;
-  over_throw = 1;
-  for(let element of entry_zero)
-    {
-     element.addEventListener("click",()=>{
-      while(fag!=0){
-      extra = element.innerHTML;
-      score=extra;
-      send_message(0);
-      fag=0;
-      }
-     })
-    }
-}
 
 // Making changes on receiving message
 
@@ -380,7 +364,6 @@ ws.onmessage = function(event){
   run_out_b1 = 0;
   run_out_b2 = 0;
   noball=0;
-  over_throw =0;
   wide_ball =0;
   byes=0;
   extra=0;

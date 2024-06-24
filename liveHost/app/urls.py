@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('registration/', views.signup, name='signup'),
     path('<str:username>/',views.homepage,name='home'),
-    path('liveHost/<str:matchId>/',views.live_host),
+    path('liveHost/<str:matchId>/',views.live_host,name='liveHost'),
     path('liveView/<str:match_id>/',views.liveView,name='liveView'),
     path('player_selection/<str:match_id>/',views.player_selection,name='player_selection'),
     path('toss/<str:match_id>/', views.toss, name='toss'),

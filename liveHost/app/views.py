@@ -104,7 +104,7 @@ def player_selection(request, match_id):
              match.save()
              username = match.host
              return redirect('home', username=username) 
-    return render(request,'player_selection.html')
+    return render(request,'player_selection.html', {'match': match, 'errors1': errors1,'errors2':errors2,'duplicates':0,'no_players':0})
 
 from django.http import JsonResponse
 
@@ -149,8 +149,6 @@ def login(request):
         username=request.POST.get('username')
         password=request.POST.get('password')
         print(f"Username: {username}, Password: {password}")
-        
-
         user=auth.authenticate(request,username=username,password=password)
         print(f"Authenticated User: {user}")  
         if user is not None:
@@ -213,8 +211,7 @@ def hosting(request,username):
                     venue=venue
                 )
         host_details.save()
-        match_id = host_details.match_id
-        
+        match_id = host_details.match_id 
         return redirect('player_selection', match_id=match_id)
     return render(request,'hosting.html')
 
@@ -230,17 +227,13 @@ def hosting(request,username):
 
 def live_host(request,matchId):
     matchId = int(matchId)
-    
     match = match_info.objects.all().filter(match_id = matchId,status = 2)[0]
     innings_number = innings.objects.all().filter(match_id = matchId)[0].innings_no
     bating_team =  innings.objects.all().filter(match_id = matchId)[0].batting_team
     bowling_team =  innings.objects.all().filter(match_id = matchId)[0].bowling_team
     innings_obj = innings.objects.all().filter(match_id = matchId)[0]
-
-   
     batsmans = []
     bowlers = []
-
     l = player_match_stats.objects.all().filter(match_id = matchId,team_name = bating_team)
     for i in l:
         batsmans.append([i.player_name,i.username])
@@ -275,9 +268,17 @@ def liveView(request, match_id):
 
 def homepage(request, username):
     player = get_object_or_404(player_stats, username=username)
-    upcoming_matches_host = match_info.objects.filter(
+    selection_matches=match_info.objects.filter(
+        host=username, 
+        status=0
+    )
+    toss_matches = match_info.objects.filter(
         host=username, 
         status=1
+    )
+    livehost_matches = match_info.objects.filter(
+        host=username, 
+        status=2
     )
     upcoming_matches = match_info.objects.filter(status=1)
     live_matches = match_info.objects.filter(status=2)
@@ -289,7 +290,12 @@ def homepage(request, username):
         'upcoming_matches' : upcoming_matches,
         'recent_matches' : recent_matches,
         'live_matches': live_matches,
-        'upcoming_matches_host': upcoming_matches_host,
+        'selection_matches': selection_matches,
+        'toss_matches':toss_matches,
+        "livehost_matches":livehost_matches,
+        'len_selection_matches': len(selection_matches),
+        'len_toss_matches':len(toss_matches),
+        "len_livehost_matches":len(livehost_matches),
         'player': player,
         'direct':direct
     }
