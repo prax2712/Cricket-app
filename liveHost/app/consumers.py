@@ -400,6 +400,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                             over_line.ball1 = over_line.ball2.replace("W","0")
                         elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                                 over_line.ball1 = over_line.ball1+" "+str(int(content['score']))
+                                if int(content['add_ball'])==0 and int(content['score'])==0:
+                                    over_line.ball1 = ""
 
                             
                     case 1:
@@ -415,6 +417,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                             over_line.ball1 = over_line.ball2.replace("W","0")
                         elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball2 = over_line.ball2+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball2 = ""
                         elif int(content['score'])<0:
                             st=over_line.ball1
                             over_line.ball1 = self.change_ball(st)
@@ -433,6 +437,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                             over_line.ball2 = over_line.ball3.replace("W","0")
                         elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball3 = over_line.ball3+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball3 = ""
                         elif int(content['score'])<0:
                             st=over_line.ball2
                             over_line.ball2 = self.change_ball(st)
@@ -450,6 +456,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                             over_line.ball3 = over_line.ball3.replace("W","0")
                         elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball4 = over_line.ball4+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball4 = ""
                         elif int(content['score'])<0:
                             st=over_line.ball3
                             over_line.ball3 = self.change_ball(st)
@@ -466,6 +474,8 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                             over_line.ball4 = over_line.ball4.replace("W","0")
                         elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball5 = over_line.ball5+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball5 = ""
                         elif int(content['score'])<0:
                             st=over_line.ball4
                             over_line.ball4 = self.change_ball(st)
@@ -482,6 +492,9 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                             over_line.ball5 = over_line.ball5.replace("W","0")
                         elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball6 = over_line.ball6+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball6 = ""
+
                         elif int(content['score'])<0:
                             st=over_line.ball5
                             over_line.ball5 = self.change_ball(st)
@@ -539,14 +552,15 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 'strike':current_data.strike,
                 'bat1_name':bat1_name,
                 'bat2_name':bat2_name,
-                'bowler_name':bowler_name
+                'bowler_name':bowler_name,
+                'match_completed':match_completed
                 } )
             if match_completed ==1:
                 self.close()
                 print("match is ended")
             if content['end_match']==1:
                 mat = match_info.objects.all().filter(match_id = self.match_id)[0]
-                mat.status = 3
+                mat.status = 4
                 mat.save()
 
 class MatchView(WebsocketConsumer):
@@ -620,14 +634,12 @@ class MatchView(WebsocketConsumer):
             'bowler_wickets': innings1.wickets_conceded,
             'bowler_balls': innings1.balls_bowler_bowled,
             'overs_timeline': [
-                overs.ball1,
-                overs.ball2,
-                overs.ball3,
-                overs.ball4,
-                overs.ball5,
-                overs.ball6,
-                
-
+                str(overs.ball1).strip(),
+                str(overs.ball2).strip(),
+                str(overs.ball3).strip(),
+                str(overs.ball4).strip(),
+                str(overs.ball5).strip(),
+                str(overs.ball6).strip(),
             ],
             'team1_players': team1_list,
             'team2_players': team2_list,

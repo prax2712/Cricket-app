@@ -4,7 +4,8 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <link rel="icon" href="{% static 'FavIcon.png'  %}">
+    <title>HowzThat</title>
     <link rel="stylesheet" href="{% static 'home.css' %}" />
   </head>
   <body> 
@@ -17,6 +18,7 @@
           <li><a href="">Home</a></li>
           <li><a href="http://127.0.0.1:8000/statistics/">Players</a></li>
           <li><a href={{direct}}>Host</a></li>
+          <li><a href="http://127.0.0.1:8000/help/">Help</a></li>
         </ul>
         <div class="nav-buttons">
           {%if user.is_authenticated%}

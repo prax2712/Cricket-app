@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HowzThat - Cricket Match Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #16a085;
+        }
+        .contact-info {
+            margin-top: 20px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .highlight {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to HowzThat!</h1>
+        <p>HowzThat is designed to help you easily create, manage, and host cricket matches in local tournaments. Our website features a user-friendly interface for hosting matches.</p>
+        
+        <div class="section">
+            <h2 class="section-title">Getting Started</h2>
+            <p>When you enter our website, you will find sections for live matches, recent matches, and upcoming matches. Any user can view these matches without logging in. Here’s what you can expect:</p>
+            <ul>
+                <li><strong>Live Matches:</strong> View current score updates of ongoing matches.</li>
+                <li><strong>Recent Matches:</strong> Access summaries of recently completed matches.</li>
+                <li><strong>Upcoming Matches:</strong> See the schedule of upcoming matches.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Hosting a Match</h2>
+            <p>To host a match, you need to log in. Follow these steps:</p>
+            <ol>
+                <li><strong>Login/Sign Up:</strong> Click the "Login" button at the top right corner. If you’re new, sign up by providing the necessary details.</li>
+                <li><strong>Host a Match:</strong> After logging in, click "Host" on the home page. You will be redirected to the match details page.</li>
+                <li><strong>Enter Match Details:</strong> Provide all the required information about the match and click "Save."</li>
+                <li><strong>Player Selection:</strong> Go to the player selection page, choose the number of players, and select team players by entering their usernames. Both teams must have unique usernames and the same number of players. <span class="highlight">Note: Players must be authenticated users.</span></li>
+                <li><strong>View Your Match:</strong> After saving, your match will appear in the upcoming matches section and in your profile under "My Matches."</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Starting the Match</h2>
+            <ol>
+                <li><strong>Access Match Details:</strong> In your profile, click on the match details to be redirected to the toss page.</li>
+                <li><strong>Toss and Selection:</strong> Decide the toss by flipping a virtual coin, select the team that won, and choose whether they will bat or bowl.</li>
+                <li><strong>Score Management:</strong> After the toss, you will be redirected to the score management page.</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Adding Scores</h2>
+            <ol>
+                <li><strong>Select Players:</strong> Choose Batsman 1, Batsman 2, and the Bowler. Their names will appear in the menu bar.</li>
+                <li><strong>Adding Scores:</strong> Click on the desired score to add it. Options include NB (no ball), WB (wide ball), and Byes. Extra runs can be added accordingly.</li>
+                <li><strong>Handling Wickets:</strong> If a batsman gets out, manually change the batsman selection. Do not reselect a batsman who has already been bowled out.</li>
+                <li><strong>Undo Function:</strong> Use the undo option to decrease balls, wickets, or runs as needed. For example, to decrease runs by 2, click the "Decrease Runs" button twice.<br><span class="highlight">Note: The undo feature cannot be used once the over has been completed. While you can still change the score, these changes will not be reflected in the over timeline.</span></li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Live Match View</h2>
+            <p>During a live match, the following features are available:</p>
+            <ul>
+                <li><strong>Batsmen Scores:</strong> Updated every ball.</li>
+                <li><strong>Bowler Details:</strong> Updated every over.</li>
+                <li><strong>Additional Info:</strong> Required run rate, target, and win equation.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Ending the Match</h2>
+            <p>A match ends automatically upon completion of overs or if the second batting team is all out. You can also manually end the match. Once completed, the match summary will be available in the recent matches section.</p>
+        </div>
+
+        <div class="section contact-info">
+            <h2 class="section-title">Contact and Support</h2>
+            <p>If you need help or have questions, visit our help center or contact us at:</p>
+            <p><strong>Email:</strong> support@howzthat.com</p>
+            <p><strong>Phone:</strong> 9440084165</p>
+        </div>
+    </div>
+</body>
+</html>

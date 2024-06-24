@@ -264,7 +264,8 @@ def live_host(request,matchId):
     return render(request,'live_host.html',content)
 
 def liveView(request, match_id):
-    return render(request, 'liveView.html', {"match_id":match_id})
+    match = match_info.objects.filter(match_id=match_id)
+    return render(request, 'liveView.html', {"match_id":match_id, "match":match})
 
 def homepage(request, username):
     player = get_object_or_404(player_stats, username=username)
@@ -283,6 +284,7 @@ def homepage(request, username):
     upcoming_matches = match_info.objects.filter(status=1)
     live_matches = match_info.objects.filter(status=2)
     recent_matches = match_info.objects.filter(status=3)
+    recent_matches = recent_matches | match_info.objects.filter(status=4)
     direct = "http://127.0.0.1:8000/hosting/"+str(player.username)+"/"
     print(direct)
     
@@ -334,13 +336,15 @@ def match_summary(request, match_id):
         if(i.bowls_bowled!=0) :
             innings1_bowling.append([i.player_name,f'{i.bowls_bowled//6}.{i.bowls_bowled%6}',i.runs_conceded,i.wickets,i.economy])
     if(match.match_winner==match.first_batting and match.status == 3):
-        result=f"{match.match_winner} won by {abs(match.innings1_score - match.innings2_score)} runs"
+        result=f"{match.match_winner} WON BY {abs(match.innings1_score - match.innings2_score)} RUNS"
     elif(match.match_winner==match.first_bowling and match.status==3):
-        result=f"{match.match_winner} won by {abs(min(match.no_players,11)-match.innings2_wickets)-1} wickets"
+        result=f"{match.match_winner} WON BY {abs(min(match.no_players,11)-match.innings2_wickets)-1} WICKETS"
     elif(match.status==3):
         result="Match Tied"
+    elif(match.status==4):
+        result="Match Abandoned"
     else:
-        result='Match still in progress'
+        result='Match Still In Progress'
     context = {
         'match': match,
         'team1_score': f"{match.innings1_score}/{match.innings1_wickets}",
@@ -360,3 +364,5 @@ def match_summary(request, match_id):
 def logout_view(request):
     logout(request)
     return redirect('/')
+def help(request):
+    return render(request,'help.html')

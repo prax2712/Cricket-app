@@ -4,12 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricket Score</title>
+<link rel="icon" href="{% static 'FavIcon.png'  %}">
+<title></title>
 <link rel="stylesheet" href="{% static 'live_host_style.css' %}">
 </head>
 <body>
+  <li><a href="http://127.0.0.1:8000/help/" style="position:absolute;top:20px;right:16px;color:#f0f0f0;font-size:20px;font-style:bold;">Help</a></li>
   <div id="layer">hi</div>
-    <div id="matchend" ><button id="endmatch" value="endmatch"><a href="/{{host}}/" style="color:#050505;font-weight: bold;">END MATCH</a></button></div>
+    <div id="matchend" ><button id="endmatch" value="{{host}}"><a style="color:#050505;font-weight: bold;">END MATCH</a></button></div>
   <div class="container">
     <div style="display:flex;justify-content: center;">
   <h1 style="color:aquamarine; display:inline;">{{team1}}</h1><span style="margin-left:25px;margin-right:25px;font-weight: bold;font-size:x-large;color:rgb(248, 87, 87)"> VS </span><h1 style="color:aquamarine;display:inline;">{{team2}}</h1>
@@ -150,7 +152,9 @@
 
 </div>
 {{MatchId|json_script:"match-id"}}
+{{team1|json_script:"team1"}}
+{{team2|json_script:"team2"}}
 
-    <script src="{% static 'live_host_scri.js' %}"></script>
+    <script src="{% static 'live_host_script.js' %}"></script>
     </body>
     </html>
