@@ -8,8 +8,7 @@
     <title>HowzThat</title>
     <link rel="stylesheet" href="{% static 'home.css' %}" />
   </head>
-  <body>
-    
+  <body> 
     <div>
       <nav class="navbar">
         <div class="logo">
@@ -19,6 +18,7 @@
           <li><a href="">Home</a></li>
           <li><a href="http://127.0.0.1:8000/statistics/">Players</a></li>
           <li><a href={{direct}}>Host</a></li>
+          <li><a href="http://127.0.0.1:8000/help/">Help</a></li>
         </ul>
         <div class="nav-buttons">
           {%if user.is_authenticated%}
@@ -43,13 +43,35 @@
     <div id="profile-info">
       {%if user.is_authenticated%}
       {% if player %}
-        <h2 id="profile-title">{{ player.first_name }} {{ player.last_name }}</h2>
-        <h3 style="font-size:17px;">Matches:</h3>
+        <h2>{{ player.first_name }} {{ player.last_name }}</h2>
+
+        {%if len_selection_matches %}
+        <h3>Matches for Selection:</h3>
         <ul>
-        {% for match in upcoming_matches_host %}
-        <li><a href="{% url 'toss' match.match_id %}" class="matches_list">{{ match.team1 }} vs {{ match.team2 }} ({{ match.match_date }})</a></li>
+        {% for match in selection_matches %}
+        <li><a href="{% url 'player_selection' match.match_id %}">{{ match.team1 }} vs {{ match.team2 }}</a></li>
         {% endfor %}
         </ul>
+        {%endif%}
+
+        {%if len_toss_matches %}
+        <h3>Matches To Start:</h3>
+        <ul>
+        {% for match in toss_matches %}
+        <li><a href="{% url 'toss' match.match_id %}">{{ match.team1 }} vs {{ match.team2 }}</a></li>
+        {% endfor %}
+        </ul>
+        {%endif%}
+
+        {%if len_livehost_matches %}
+        <h3>Live :</h3>
+        <ul>
+        {% for match in livehost_matches %}
+        <li><a href="{% url 'liveHost' match.match_id %}">{{ match.team1 }} vs {{ match.team2 }}</a></li>
+        {% endfor %}
+        </ul>
+        {%endif%}
+
       {% endif %}
       {% endif %}
     </div>

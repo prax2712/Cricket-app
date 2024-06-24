@@ -82,11 +82,11 @@ ASGI_APPLICATION = 'liveHost.asgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'howzthat',
+        'NAME': 'sample',
         'HOST':'127.0.0.1',
         'PORT':'3306',
         'USER':'root',
-        'PASSWORD':'Sohail@2004',
+        'PASSWORD':'Database@123',
     }
 }
 

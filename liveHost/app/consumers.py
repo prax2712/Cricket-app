@@ -7,36 +7,38 @@ from django.db.models import Prefetch
 # from rest_framework import serializers
 
 class LiveHostWebsocket(JsonWebsocketConsumer):
-    def change_ball(s):
+    def change_ball(self,s:str):
         if "1" in s:
-            s.replace("1","0")
+            s=s.replace("1","0")
             return s
         elif "2" in s:
-            s.replace("2","1")
+            s=s.replace("2","1")
             return s
         elif "3" in s:
-            s.replace("3","2")
+            s=s.replace("3","2")
             return s
         elif "4" in s:
-            s.replace("4","3")
+            s=s.replace("4","3")
             return s
         elif "5" in s:
-            s.replace("5","4")
+            s=s.replace("5","4")
             return s
         elif "6" in s:
-            s.replace("6","5")
+            s=s.replace("6","5")
             return s
         elif "1" in s:
-            s.replace("1","")
+            s=s.replace("1","")
             return s
         elif "7" in s:
-            s.replace("7","6")
+            s=s.replace("7","6")
             return s
-        if "8" in s:
-            s.replace("8","7")
+        elif "8" in s:
+            s=s.replace("8","7")
             return s
-        if "9" in s:
-            s.replace("9","8")
+        elif "9" in s:
+            s=s.replace("9","8")
+            return s
+        else:
             return s
         
 
@@ -395,9 +397,11 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball1 = over_line.ball1+" W"
                         elif content['wickets']==-1:
-                            over_line.ball1 = over_line.ball2.replace("W","")
-                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
+                            over_line.ball1 = over_line.ball2.replace("W","0")
+                        elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                                 over_line.ball1 = over_line.ball1+" "+str(int(content['score']))
+                                if int(content['add_ball'])==0 and int(content['score'])==0:
+                                    over_line.ball1 = ""
 
                             
                     case 1:
@@ -410,11 +414,14 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball2 = over_line.ball2+" W"
                         elif content['wickets']==-1:
-                            over_line.ball1 = over_line.ball2.replace("W","")
-                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
+                            over_line.ball1 = over_line.ball2.replace("W","0")
+                        elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball2 = over_line.ball2+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball2 = ""
                         elif int(content['score'])<0:
-                            over_line.ball1 = self.change_ball(over_line.ball1)
+                            st=over_line.ball1
+                            over_line.ball1 = self.change_ball(st)
 
 
                     case 2:
@@ -427,11 +434,14 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball3 = over_line.ball3+" W"
                         elif content['wickets']==-1:
-                            over_line.ball2 = over_line.ball3.replace("W","")
-                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
+                            over_line.ball2 = over_line.ball3.replace("W","0")
+                        elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball3 = over_line.ball3+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball3 = ""
                         elif int(content['score'])<0:
-                            over_line.ball2 = self.change_ball(over_line.ball2)
+                            st=over_line.ball2
+                            over_line.ball2 = self.change_ball(st)
                         
                     case 3:
                         if content['noball']==1:
@@ -443,11 +453,14 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball4 = over_line.ball4+" W"
                         elif content['wickets']==-1:
-                            over_line.ball3 = over_line.ball3.replace("W","")
-                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
+                            over_line.ball3 = over_line.ball3.replace("W","0")
+                        elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball4 = over_line.ball4+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball4 = ""
                         elif int(content['score'])<0:
-                            over_line.ball3 = self.change_ball(over_line.ball3)
+                            st=over_line.ball3
+                            over_line.ball3 = self.change_ball(st)
                     case 4:
                         if content['noball']==1:
                             over_line.ball5 = over_line.ball5+str(content['extra'])+"NB"
@@ -458,11 +471,14 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball5 = over_line.ball5+" W"
                         elif content['wickets']==-1:
-                            over_line.ball4 = over_line.ball4.replace("W","")
-                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
+                            over_line.ball4 = over_line.ball4.replace("W","0")
+                        elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball5 = over_line.ball5+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball5 = ""
                         elif int(content['score'])<0:
-                            over_line.ball4 = self.change_ball(over_line.ball4)
+                            st=over_line.ball4
+                            over_line.ball4 = self.change_ball(st)
                     case 5:
                         if content['noball']==1:
                             over_line.ball6 = over_line.ball6+str(content['extra'])+"NB"
@@ -473,11 +489,15 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                         elif content['run_out_b1']==1 or content['run_out_b2']==1 or content['wickets']==1:
                             over_line.ball6 = over_line.ball6+" W"
                         elif content['wickets']==-1:
-                            over_line.ball5 = over_line.ball5.replace("W","")
-                        elif int(content['add_ball'])>=1 or int(content['score'])>=0:
+                            over_line.ball5 = over_line.ball5.replace("W","0")
+                        elif int(content['add_ball'])>=0 and int(content['score'])>=0:
                             over_line.ball6 = over_line.ball6+" "+str(int(content['score']))
+                            if int(content['add_ball'])==0 and int(content['score'])==0:
+                                over_line.ball6 = ""
+
                         elif int(content['score'])<0:
-                            over_line.ball5 = self.change_ball(over_line.ball5)
+                            st=over_line.ball5
+                            over_line.ball5 = self.change_ball(st)
                 
                 if int(content['add_ball'])>=0:
                     over_line.ball = (over_line.ball+int(content['add_ball']))%6
@@ -532,14 +552,15 @@ class LiveHostWebsocket(JsonWebsocketConsumer):
                 'strike':current_data.strike,
                 'bat1_name':bat1_name,
                 'bat2_name':bat2_name,
-                'bowler_name':bowler_name
+                'bowler_name':bowler_name,
+                'match_completed':match_completed
                 } )
             if match_completed ==1:
                 self.close()
                 print("match is ended")
             if content['end_match']==1:
                 mat = match_info.objects.all().filter(match_id = self.match_id)[0]
-                mat.status = 3
+                mat.status = 4
                 mat.save()
 
 class MatchView(WebsocketConsumer):

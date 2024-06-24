@@ -160,6 +160,10 @@ chatSocket.onmessage = function (event) {
     document.getElementById("ball1").style.backgroundColor = "green";
     document.getElementById("ball1").style.color = "white";
   }
+  else {
+    document.getElementById("ball1").style.backgroundColor = "white";
+    document.getElementById("ball1").style.color = "black";
+  }
   document.getElementById("ball2").textContent = data.overs_timeline[1];
   if(data.overs_timeline[1]=='W'){
     document.getElementById("ball2").style.backgroundColor = "red";
@@ -168,6 +172,10 @@ chatSocket.onmessage = function (event) {
   else if(data.overs_timeline[1]=='4'||data.overs_timeline[1]=='6'){
     document.getElementById("ball2").style.backgroundColor = "green";
     document.getElementById("ball2").style.color = "white";
+  }
+  else {
+    document.getElementById("ball2").style.backgroundColor = "white";
+    document.getElementById("ball2").style.color = "black";
   }
   document.getElementById("ball3").textContent = data.overs_timeline[2];
   if(data.overs_timeline[2]=='W'){
@@ -178,6 +186,10 @@ chatSocket.onmessage = function (event) {
     document.getElementById("ball3").style.backgroundColor = "green";
     document.getElementById("ball3").style.color = "white";
   }
+  else {
+    document.getElementById("ball3").style.backgroundColor = "white";
+    document.getElementById("ball3").style.color = "black";
+  }
   document.getElementById("ball4").textContent = data.overs_timeline[3];
   if(data.overs_timeline[3]=='W'){
     document.getElementById("ball4").style.backgroundColor = "red";
@@ -186,6 +198,10 @@ chatSocket.onmessage = function (event) {
   else if(data.overs_timeline[3]=='4'||data.overs_timeline[3]=='6'){
     document.getElementById("ball4").style.backgroundColor = "green";
     document.getElementById("ball4").style.color = "white";
+  }
+  else {
+    document.getElementById("ball4").style.backgroundColor = "white";
+    document.getElementById("ball4").style.color = "black";
   }
   document.getElementById("ball5").textContent = data.overs_timeline[4];
   if(data.overs_timeline[4]=='W'){
@@ -196,6 +212,10 @@ chatSocket.onmessage = function (event) {
     document.getElementById("ball5").style.backgroundColor = "green";
     document.getElementById("ball5").style.color = "white";
   }
+  else {
+    document.getElementById("ball5").style.backgroundColor = "white";
+    document.getElementById("ball5").style.color = "black";
+  }
   document.getElementById("ball6").textContent = data.overs_timeline[5];
   if(data.overs_timeline[5]=='W'){
     document.getElementById("ball6").style.backgroundColor = "red";
@@ -204,6 +224,10 @@ chatSocket.onmessage = function (event) {
   else if(data.overs_timeline[5]=='4'||data.overs_timeline[5]=='6'){
     document.getElementById("ball6").style.backgroundColor = "green";
     document.getElementById("ball6").style.color = "white";
+  }
+  else {
+    document.getElementById("ball6").style.backgroundColor = "white";
+    document.getElementById("ball6").style.color = "black";
   }
   if (data.team1 == data.first_batting) {
     innings1DataBatting = data.team1_players;
