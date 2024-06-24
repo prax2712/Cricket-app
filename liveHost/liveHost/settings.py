@@ -80,13 +80,13 @@ ASGI_APPLICATION = 'liveHost.asgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+        'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'howzthat',
+        'NAME': 'sample',
         'HOST':'127.0.0.1',
         'PORT':'3306',
         'USER':'root',
-        'PASSWORD':'Sohail@2004',
+        'PASSWORD':'Database@123',
     }
 }
 
@@ -132,11 +132,4 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-}
+

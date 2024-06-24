@@ -37,14 +37,23 @@ def player_selection(request, match_id):
              return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':0,'no_players':1})
         print(len(set(team1_players)))
         print(len(set(team2_players)))
+        if(no_players!=15):
+            no_duplicates_list1 = team1_players_entered+1 == len(set(team1_players))
+            no_duplicates_list2 = team2_players_entered+1 == len(set(team2_players))
+            all_players=len(set(team1_players+team2_players))
+            if not (no_duplicates_list1 and no_duplicates_list2 and 2*no_players+1 == all_players):
+                print("dup")
+                return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':1,'no_players':0})
+            
+        else:
+            no_duplicates_list1 = team1_players_entered == len(set(team1_players))
+            no_duplicates_list2 = team2_players_entered == len(set(team2_players))
+            all_players=len(set(team1_players+team2_players))==30
+            if not (no_duplicates_list1 and no_duplicates_list2 and all_players):
+                print("dup")
+                return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':1,'no_players':0})
 
-        no_duplicates_list1 = team1_players_entered+1 == len(set(team1_players))
-        no_duplicates_list2 = team2_players_entered+1 == len(set(team2_players))
-        all_players=len(set(team1_players+team2_players))
 
-        if not (no_duplicates_list1 and no_duplicates_list2 and 2*no_players+1 == all_players):
-             print("dup")
-             return render(request, 'player_selection.html', {'match': match, 'errors1': [0 for i in range(15)],'errors2':[0 for i in range(15)],'duplicates':1,'no_players':0})
         
 
 
@@ -256,6 +265,7 @@ def live_host(request,matchId):
         'total_score':innings_obj.runs_scored,
         'total_wickets':innings_obj.wickets,
         'runs_conceded':innings_obj.runs_conceded,
+        'host':match.host
         
     }
     return render(request,'live_host.html',content)
@@ -321,6 +331,8 @@ def match_summary(request, match_id):
         result=f"{match.match_winner} won by {abs(match.innings1_score - match.innings2_score)} runs"
     elif(match.match_winner==match.first_bowling and match.status==3):
         result=f"{match.match_winner} won by {abs(min(match.no_players,11)-match.innings2_wickets)-1} wickets"
+    elif(match.status==3):
+        result="Match Tied"
     else:
         result='Match still in progress'
     context = {
@@ -334,6 +346,8 @@ def match_summary(request, match_id):
         'innings1_bowling':innings1_bowling,
         'innings2_batting':innings2_batting,
         'innings2_bowling':innings2_bowling,
+        'innings1_overs':f'{match.innings1_overs//6}.{match.innings1_overs%6}',
+        'innings2_overs':f'{match.innings2_overs//6}.{match.innings2_overs%6}'
     }
     return render(request, 'match_summary.html', context)
 
