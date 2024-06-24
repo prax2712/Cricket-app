@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricket Score</title>
+<link rel="icon" href="{% static 'FavIcon.png'  %}">
+<title></title>
 <link rel="stylesheet" href="{% static 'live_host_style.css' %}">
 </head>
 <body>
@@ -151,6 +152,8 @@
 
 </div>
 {{MatchId|json_script:"match-id"}}
+{{team1|json_script:"team1"}}
+{{team2|json_script:"team2"}}
 
     <script src="{% static 'live_host_scri.js' %}"></script>
     </body>

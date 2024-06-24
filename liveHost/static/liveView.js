@@ -116,6 +116,7 @@ chatSocket.onmessage = function (event) {
   if(data.match_status==3){
     window.location.href = "/match_summary/" + match_id;
   }
+  document.title = data.team1 + " vs " + data.team2; 
   document.getElementById("team1").textContent = data.team1;
   document.getElementById("team2").textContent = data.team2;
   document.getElementById("score-value").textContent = data.score + " ";
@@ -151,7 +152,7 @@ chatSocket.onmessage = function (event) {
     document.getElementById("target").textContent = "Target: " + "-";
   else document.getElementById("target").textContent = "Target: " + data.target;
   document.getElementById("ball1").textContent = data.overs_timeline[0];
-  if(data.overs_timeline[0]=='W'){
+  if(data.overs_timeline[0]=="W"){
     document.getElementById("ball1").style.backgroundColor = "red";
     document.getElementById("ball1").style.color = "white";
   }
@@ -231,7 +232,6 @@ chatSocket.onmessage = function (event) {
     document.getElementById("curr-run-rate").textContent = parseFloat(data.innings1_score_num/parseFloat(data.overs/6)).toFixed(2);
     document.getElementById("req-run-rate").textContent = parseFloat((data.target - data.innings1_score_num)/parseFloat(((data.maximum_overs)*6 - data.overs)/6)).toFixed(2);
   }
-  console.log(data.target-data.innings1_score_num);
   if(data.innings_no==2){
     document.getElementById('need').textContent = "Need " + String(data.target - data.innings1_score_num) + " runs from " + String(data.maximum_overs*6 - data.overs) + " balls"; 
   }

@@ -62,7 +62,9 @@ console.log(document.getElementById("batsman-1").value+"hello sir");
 console.log(document.getElementById("batsman-2").value+"hello sir");
 
 const match_id = JSON.parse(document.getElementById("match-id").textContent);
-
+const team_1 = JSON.parse(document.getElementById("team1").textContent);
+const team_2 = JSON.parse(document.getElementById("team2").textContent)
+document.title = team_1 + " vs " + team_2;
 //web socket connection
 
 ws = new WebSocket('ws://127.0.0.1:8000/liveHost/'+match_id+'/');
