@@ -38,13 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (loginButton) {
     loginButton.onclick = function() {
-      window.location.href = "http://127.0.0.1:8000/login";
+      window.location.href = "http://http://howzthat.pythonanywhere.com0/login";
     }
   }
 
   if (logoutButton) {
     logoutButton.onclick = function() {
-      window.location.href = "http://127.0.0.1:8000/logout";
+      window.location.href = "http://http://howzthat.pythonanywhere.com0/logout";
     }
   }
 });
