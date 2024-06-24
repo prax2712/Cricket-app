@@ -253,7 +253,7 @@ document.getElementById("endmatch").onclick=function(){
   end_match=1;
   send_message();
   window.location.reload();
-  window.location.href="http://http://howzthat.pythonanywhere.com/"+document.getElementById("endmatch").value+"/"
+  window.location.href="http://howzthat.pythonanywhere.com/"+document.getElementById("endmatch").value+"/"
   }
   else{
     console.log("clicked on cancel");
@@ -389,7 +389,7 @@ ws.onmessage = function(event){
   console.log(current_data.current_score);
   if(current_data.match_completed==1)
     {
-      window.location.href="http://http://howzthat.pythonanywhere.com/match_summary/"+match_id+"/";
+      window.location.href="http://howzthat.pythonanywhere.com/match_summary/"+match_id+"/";
     }
   document.getElementById("total-score").innerHTML=current_data.current_score;//updating total score of bating team
 document.getElementById("bating-team-name").textContent = current_data.bating_team;
