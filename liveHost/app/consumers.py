@@ -613,14 +613,12 @@ class MatchView(WebsocketConsumer):
             'bowler_wickets': innings1.wickets_conceded,
             'bowler_balls': innings1.balls_bowler_bowled,
             'overs_timeline': [
-                overs.ball1,
-                overs.ball2,
-                overs.ball3,
-                overs.ball4,
-                overs.ball5,
-                overs.ball6,
-                
-
+                str(overs.ball1).strip(),
+                str(overs.ball2).strip(),
+                str(overs.ball3).strip(),
+                str(overs.ball4).strip(),
+                str(overs.ball5).strip(),
+                str(overs.ball6).strip(),
             ],
             'team1_players': team1_list,
             'team2_players': team2_list,

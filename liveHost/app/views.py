@@ -271,7 +271,8 @@ def live_host(request,matchId):
     return render(request,'live_host.html',content)
 
 def liveView(request, match_id):
-    return render(request, 'liveView.html', {"match_id":match_id})
+    match = match_info.objects.filter(match_id=match_id)
+    return render(request, 'liveView.html', {"match_id":match_id, "match":match})
 
 def homepage(request, username):
     player = get_object_or_404(player_stats, username=username)
@@ -282,6 +283,7 @@ def homepage(request, username):
     upcoming_matches = match_info.objects.filter(status=1)
     live_matches = match_info.objects.filter(status=2)
     recent_matches = match_info.objects.filter(status=3)
+    recent_matches = recent_matches | match_info.objects.filter(status=4)
     direct = "http://127.0.0.1:8000/hosting/"+str(player.username)+"/"
     print(direct)
     
