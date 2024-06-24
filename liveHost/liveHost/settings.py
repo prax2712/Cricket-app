@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ammegtc_4wo@-&n(54*0pqw&((#=4llj!+quj=6q)^go78#pe+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['howzthat.pythonanywhere.com']
 
 
 # Application definition
@@ -82,11 +82,11 @@ ASGI_APPLICATION = 'liveHost.asgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sample',
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
-        'USER':'root',
-        'PASSWORD':'Database@123',
+        'NAME': 'howzthat$default',  
+        'USER': 'howzthat',
+        'PASSWORD': 'database@304',
+        'HOST': 'howzthat.mysql.pythonanywhere-services.com',  # Your MySQL hostname
+        'PORT': '3306',   
     }
 }
 
